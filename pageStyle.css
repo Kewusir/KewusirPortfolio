@@ -1,0 +1,559 @@
+/*  Global Page Setup 
+whole page background: purple, text is white on top.*/
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:#4141ca 80%;
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+/*  Top Bar : top header block with site name.
+   semi-transparent dark box with subtle border, rounded corners */
+.top-bar {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 20px auto;
+    border: 1px solid rgba(255,255,255,0.3);
+    background-color: rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* left side: my name / branding */
+.site-name {
+    float: left;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 1.1em;
+}
+
+/*  Navigation: right side of the header is the nav links */
+.top-nav {
+    float: right;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* show nav links in one line */
+.main-nav li {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+/* links inside the nav:
+   white text, no underline, with a fake underline we control ourselves */
+.main-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95em;
+    font-weight: bold;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 4px;
+}
+
+/* hover/active state: show underline to indicate current page / hover */
+.main-nav a:hover {
+    border-bottom: 2px solid #ffffff;
+}
+
+.main-nav a.active {
+    border-bottom: 2px solid #ffffff;
+}
+
+/*  Hero Card: main intro card on the homepage 
+   same glassy look: dark transparent box + border + radius */
+.hero-card {
+    width: 90%;
+    max-width: 1100px;
+    margin: 100px auto 0 auto; 
+    background-color: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 40px 30px;
+    color: #ffffff;
+    overflow: auto; /* so floats inside don't break the box height */
+}
+
+/*Left and Right Layout : 2-column layout in the hero card:
+   text on the left, profile photo on the right.
+   using float layout instead of flex/grid on purpose*/
+.left-side {
+    float: left;
+    width: 60%;
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+.right-side {
+    float: right;
+    width: 40%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/*Text Styling :main heading = my intro line */
+.main-heading {
+    font-size: 2em;
+    line-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.name-highlight {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* role / subtitle under my name */
+.role-heading {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* body text under the heading.
+   slightly dimmer than pure white for readability */
+.intro-text {
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.5em;
+    max-width: 90%;
+    margin-bottom: 30px;
+}
+
+/* Buttons Section  */
+.button-row {
+    margin-bottom: 20px;
+}
+
+/* CV / contact style buttons.
+   white pill button to stand out against dark background */
+.cv-button {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 1px solid #000000;
+    margin-right: 10px;
+}
+
+.cv-button:hover {
+    background-color: #dddddd;
+}
+
+/* Social Icons */
+.social-icon {
+    width: 36px;
+    height: 36px;
+    margin: 0 6px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/*  Profile Photo: ring around the profile photo on the homepage
+   (white ring + translucent dark background) */
+.photo-ring {
+    display: inline-block;
+    border: 3px solid rgba(255,255,255,0.8);
+    border-radius: 50%;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.3);
+}
+
+/* actual profile image */
+.profile-photo-home {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    background-color: #000000;
+}
+
+/* Footer : small grey footer text at the bottom of the page */
+footer {
+    text-align: center;
+    color: #bbb;
+    font-size: 0.8em;
+    margin-top: 40px;
+}
+
+.time-greeting {
+    margin-top: 75px;  /* 往下更多 */
+    font-style: italic;
+    font-family: "Brush Script MT", "Comic Sans MS", cursive;
+    font-size: 3.5em;  /* 字体更大 */
+    color: #ffffff;
+    text-align: center;  /* 居中对齐，让它更漂亮 */
+    opacity: 0.9;        /* 稍微柔和一点 */
+}
+
+/* === About Page Sections === */
+/* reusable card section used on About etc. */
+.about-section {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto 0 auto;
+    background-color: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 30px;
+    color: #ffffff;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* section headers on About
+   white text + left border bar */
+.section-title {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-left: 4px solid #ffffff;
+    padding-left: 10px;
+}
+
+/* Education item block */
+.edu-item {
+    margin-bottom: 20px;
+    line-height: 1.5em;
+    color: #ddd;
+    font-size: 0.95em;
+    max-width: 800px;
+}
+
+/* school / course title line */
+.edu-item-title {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* sub text under education (dates etc.), lighter grey */
+.edu-item-sub {
+    color: #aaa;
+    font-size: 0.9em;
+    margin-bottom: 6px;
+}
+
+/* personal photo in the About page, same circular style */
+.about-photo-wrap {
+    text-align: center;
+}
+
+.about-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    background-color: #000000;
+}
+
+/* activity / hobby mini cards with photo + caption */
+.activity-frame {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 12px;
+    max-width: 260px;
+    text-align: center;
+    color: #fff;
+    font-size: 0.8em;
+    line-height: 1.4em;
+}
+
+/* inside the activity card:
+   image with rounded corners and a light border */
+.activity-photo {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(255,255,255,0.4);
+    background-color: #000000;
+    margin-bottom: 8px;
+}
+
+.activity-caption {
+    color: #bbb;
+    font-size: 0.8em;
+}
+
+/* === Portfolio Page === */
+.portfolio-section {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+/* each project in the portfolio page.*/
+.portfolio-item {
+    background-color: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    overflow: auto;
+    box-sizing: border-box;
+}
+
+/* left block */
+.work-image {
+    float: left;
+    width: 40%;
+    max-width: 380px;
+    min-width: 260px; 
+    box-sizing: border-box;
+    margin-right: 20px;
+}
+
+.work-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    background-color: #000;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* hover tilt effect */
+.work-image img:hover {
+    transform: scale(1.03) rotate(2deg);
+}
+
+
+/* right block*/
+.work-text {
+    float: left;
+    width: calc(60% - 20px); 
+    box-sizing: border-box;
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.5em;
+    min-height: 220px; 
+    display: block;
+}
+
+.work-text h2 {
+    color: #fff;
+    font-size: 1.3em;
+    line-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.work-text p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.5em;
+}
+
+/* === Skills & Interests Polished Layout === */
+
+/* bullet list styling for skills */
+.skill-list {
+    list-style-type: none;
+    padding-left: 0;
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.6em;
+}
+
+.skill-list li {
+    margin-bottom: 10px;
+}
+
+/* each "interest" block:
+   switched to flex so image + text line up nicely and stay centred */
+.interest-item {
+    background-color: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 12px;
+    padding: 25px 20px;
+    margin-bottom: 40px;
+    display: flex;              /* flex layout instead of float */
+    align-items: center;        /* vertically align items */
+    gap: 25px;                  /* space between image + text */
+    flex-wrap: wrap;            /* allows wrap on smaller screens */
+}
+
+/* left side image in the interest card */
+.interest-item .work-image {
+    flex: 0 0 40%;
+    max-width: 380px;
+    min-width: 260px;
+}
+
+.interest-item .work-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.3);
+    object-fit: cover;
+}
+
+/* right side text in the interest card */
+.interest-item .work-text {
+    flex: 1;
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.5em;
+}
+
+/* mini heading inside interests */
+.interest-item h3 {
+    color: #fff;
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.about-section .interest-item:nth-of-type(1) .work-image img {
+    transform: translateY(8px);
+}
+
+.about-section .interest-item:nth-of-type(2) .work-image img {
+    transform: translateY(-6px);
+}
+
+.interest-item p .social-icon {
+    margin-top: 8px;
+    position: relative;
+    top: 5px;
+}
+
+/* === Future Aim box inside Skills & Interests === */
+/* callout box with softer border, slightly lighter background. */
+.future-aim-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px 25px;
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.6em;
+    max-width: 900px;
+    margin: 10px auto 0 auto;
+    box-sizing: border-box;
+}
+
+.future-aim-box strong {
+    color: #fff;
+}
+
+/* === Contact Page === */
+
+/* contact info block (email / phone / address etc.)  */
+.contact-info {
+    margin-top: 60px;  
+    color: #ddd;
+    font-size: 0.95em;
+    line-height: 1.6em;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-info strong {
+    color: #fff;
+}
+
+/* links in contact section:
+   white text with a subtle underline on hover  */
+.contact-info a {
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    transition: border-color 0.3s;
+}
+
+.contact-info a:hover {
+    border-color: #fff;
+}
+
+.contact-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;     
+}
+
+.contact-col {
+    flex: 1 1 55%;
+    min-width: 280px;
+}
+
+.contact-media {
+    flex: 0 1 40%;
+    min-width: 260px;
+}
+
+/* boxed image*/
+.contact-image-box {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* keep the original image proportions */
+.contact-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;  
+}
+
+/* Spotify icon + player row in Skills page */
+.spotify-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;              /* space between icon and player */
+    margin-top: 12px;
+    flex-wrap: wrap;        /* small screens: player wraps to next line */
+}
+
+/* Player box in the box*/
+.spotify-embed-box {
+    flex: 1 1 200px;
+    max-width: 360px;
+    margin-left: 5px;   
+}
+
+.spotify-embed-box iframe {
+    width: 100%;
+    min-height: 152px;      /* Spotify height */
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.3);
+    display: block;
+}
+
+
