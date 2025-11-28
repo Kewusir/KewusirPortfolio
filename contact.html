@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact - Kevin Huang Wu</title>
+  <link rel="stylesheet" href="pageStyle.css" />
+
+  <!-- extra styles just for the message box -->
+  <style>
+    .contact-message-box {
+      margin-top: 16px;       /* closer to the image, looks neater */
+    }
+
+    .contact-message-box label {
+      font-size: 0.9em;
+      color: #fff;
+    }
+
+    .contact-message-box textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.3);
+      background-color: rgba(0,0,0,0.25);
+      color: #fff;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 0.9em;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    .cv-button {
+      display: inline-block;
+      background-color: #ffffff;
+      color: #000000;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9em;
+      border: 1px solid #000000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- top navigation bar -->
+  <div class="top-bar">
+    <div class="site-name">Kevin's Portfolio.</div>
+    <nav class="main-nav top-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="skills.html">Skills &amp; Interests</a></li>
+        <li><a class="active" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div style="clear: both;"></div>
+  </div>
+
+  <!-- contact details -->
+  <div class="about-section">
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact-row">
+      <!-- LEFT: text -->
+      <div class="contact-col">
+        <div class="contact-info">
+          <p><strong>Email:</strong> <a href="mailto:kewu@tcd.ie">kewu@tcd.ie</a></p>
+          <p><strong>Phone:</strong> 087 338 3222</p>
+          <p><strong>Address:</strong><br>
+            Trinity College Dublin,<br>
+            The University of Dublin,<br>
+            College Green, Dublin 2, D02 PN40, Ireland.
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT: image + message box -->
+      <div class="contact-media">
+        <div class="contact-image-box">
+          <img src="https://macneill.scss.tcd.ie/~kewu/HTML_Assignment/images/contact.png"
+               alt="Map of Trinity College Dublin"
+               class="contact-image">
+        </div>
+
+        <!-- message input box under the image -->
+        <div class="contact-message-box">
+          <form id="contact-message-form">
+            <label for="contactMessage">Message</label><br>
+            <textarea id="contactMessage" name="contactMessage"
+                      placeholder="Type a short message..."></textarea><br>
+            <button type="submit" class="cv-button">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <p>&copy; 2025 TCD Interactive Digital Media Assignment Kevin Huang Wu</p>
+  </footer>
+
+  <!-- single shared JS file -->
+  <script src="script.js"></script>
+
+</body>
+</html>

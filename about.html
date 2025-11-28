@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>About - Kevin Huang Wu</title>
+    <link rel="stylesheet" href="pageStyle.css" />
+
+    <!-- extra styles for the rectangle image on the right -->
+    <style>
+        .about-rectangle-frame {
+            width: 360px;
+            height: 240px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.4);
+            background-color: rgba(0,0,0,0.25);
+            margin: auto;
+        }
+
+        .about-rectangle-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: opacity 0.8s ease-in-out;
+            opacity: 1;
+        }
+        .about-photo-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding-top: 40px;
+        }
+
+        .about-rectangle-frame {
+          margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top navigation bar -->
+    <div class="top-bar">
+        <div class="site-name">Kevin's Portfolio.</div>
+        <nav class="main-nav top-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a class="active" href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="skills.html">Skills &amp; Interests</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div style="clear: both;"></div>
+    </div>
+
+
+    <!-- SECTION 1: About Me -->
+    <div class="about-section">
+        <div class="left-side">
+            <h1 class="main-heading">About Me</h1>
+            <p class="intro-text">
+                I am a graduate of M.Phil Music and Media Technology student in Trinity College Dublin, and currently studying my second postgraduate programme in M.Sc Interactive Digital Media also in Trinity College Dublin.
+                My work explores the intersection of sound, modern technology, and experience design on
+                how music, storytelling, and media interaction can create emotional and memorable moments using media technology.
+                <br><br>
+                I enjoy taking ideas from concept to completion, whether composing and producing
+                sound, developing interactive media, or designing audiovisual experiences.
+                I also work in the field of developing games for Brain Computer Interface using duo hybrid brain-wave systems.
+                <br><br>
+                I’m comfortable bridging artistic vision and technical execution, ensuring
+                creativity meets precision. In both academic projects and community work,
+                I’ve often been the person who connects people, plans structure, and makes sure
+                “the vision actually happens” when it is needed.
+            </p>
+        </div>
+
+        <!-- right column – rectangle cycling images -->
+        <div class="right-side about-photo-wrap">
+            <div class="about-rectangle-frame">
+                <img id="aboutCycleImage"
+                     src=""
+                     alt="About rotating image"
+                     class="about-rectangle-photo">
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+    </div>
+
+
+    <!-- SECTION 2: Education -->
+    <div class="about-section">
+        <h2 class="section-title">Education</h2>
+
+        <div class="edu-item">
+            <div class="edu-item-title">M.Phil. Music and Media Technology</div>
+            <div class="edu-item-sub">Trinity College Dublin · 2024&nbsp;&ndash;&nbsp;2025</div>
+            Focus areas: interactive systems, audio design, digital media composition,
+            and immersive sound experience.
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-item-title">B.A. Music</div>
+            <div class="edu-item-sub">Trinity College Dublin · 2020&nbsp;&ndash;&nbsp;2024</div>
+            Class Representative for the Music Department throughout undergraduate study.
+            Developed interests in media production, sound design, and creative collaboration.
+        </div>
+    </div>
+
+
+    <!-- SECTION 3: Leadership & Student Life -->
+    <div class="about-section">
+        <div class="left-side">
+            <h2 class="section-title">Leadership &amp; Student Life</h2>
+
+            <div class="intro-text">
+                I currently serve as Chairperson of the Trinity College Dublin Chinese Society
+                (CCSA), representing and supporting over 600 Chinese students.
+                <br><br>
+                In this leadership role, I have been responsible for organising large-scale cultural,
+                social, and networking events, collaborating with university bodies, and helping
+                build an inclusive community for international Chinese students and students who are interested in Chinese culture.
+                <br><br>
+                Leading such a big organisation has strengthened my teamwork,
+                communication, and event management skills, while also allowing me to
+                connect cultures and foster meaningful experiences for others.
+            </div>
+
+            <!-- quick summary list of responsibilities -->
+            <ul class="exp-list">
+                <li>Chairperson, Trinity Chinese Students and Scholars Association (2023–Present)</li>
+                <li>Representing a more than 600 members community within Trinity College Dublin.</li>
+                <li>Organised cultural and networking events for student engagement and wellbeing.</li>
+                <li>Collaborated with the Students' Union and university offices on events and support.</li>
+            </ul>
+        </div>
+
+        <!-- right column: event photo with caption. -->
+        <div class="right-side about-photo-wrap">
+            <div class="activity-frame">
+                <img src="https://macneill.scss.tcd.ie/~kewu/HTML_Assignment/images/leadership.JPG"
+                     alt="Kevin Huang Wu at CSSA event"
+                     class="activity-photo">
+                <div class="activity-caption">
+                    Chairperson, TCD Chinese Society – Leading cultural and community events.
+                </div>
+            </div>
+        </div>
+
+        <div style="clear: both;"></div>
+    </div>
+
+
+    <!-- SECTION 4: Awards & Recognition -->
+    <div class="about-section">
+        <h2 class="section-title">Awards &amp; Recognition</h2>
+
+        <div class="edu-item">
+            <div class="edu-item-title">E3 Balanced Solution for a Better World Scholarship</div>
+            <div class="edu-item-sub">Trinity College Dublin · 2023&nbsp;&ndash;&nbsp;2025</div>
+            Awarded for academic excellence and interdisciplinary engagement within Trinity’s E3 initiative.
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-item-title">Rockschool Level&nbsp;6 Teaching Diploma</div>
+            <div class="edu-item-sub">Rockschool UK · 2018</div>
+            Certified professional qualification in music teaching, focused on pedagogy and performance excellence.
+        </div>
+
+        <div class="edu-item">
+            <div class="edu-item-title">Rockschool Grade&nbsp;8 Drum&nbsp;–&nbsp;Pass with Distinction</div>
+            <div class="edu-item-sub">Rockschool UK · 2015</div>
+            Achieved top distinction in Grade&nbsp;8 Drum performance, demonstrating advanced technical and musical ability.
+        </div>
+    </div>
+
+
+    <!-- footer -->
+    <footer>
+        <p>&copy; 2025 TCD Interactive Digital Media Assignment Kevin Huang Wu</p>
+    </footer>
+
+    <!-- single shared JS file -->
+    <script src="script.js"></script>
+
+</body>
+</html>
