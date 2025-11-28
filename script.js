@@ -1,23 +1,15 @@
-/* ===============================
-   Kevin's Portfolio – Page Effects
-   Uses: DOM, Functions, Loops,
-         Objects, Events, API
-===============================*/
-
 document.addEventListener("DOMContentLoaded", function () {
     initFloatingPhotos();
     initScrollReveal();
     initHoverGlow();
-    initSpotifyEmbed();        // Skills page – Spotify embed
-    initTimeGreeting();        // Home page – time based greeting
-    initAboutImageCycle();     // About page – rotating rectangle image
-    initContactMessageForm();  // Contact page – message form
+    initSpotifyEmbed();        // Skills page – Spotify embed API/JSON
+    initTimeGreeting();        // Home page – computer time based greeting
+    initAboutImageCycle();     // About page – rotating rectangle self images
+    initContactMessageForm();  // Contact page – message form to contact
 });
 
-/* -------------------------------
-   1. Floating photos
-   Slight up–down motion on circles
---------------------------------*/
+// Floating photos, Slight up–down motion on circles
+
 const floatingPhotos = [];
 
 function initFloatingPhotos() {
@@ -47,10 +39,8 @@ function stepFloatingPhotos() {
     requestAnimationFrame(stepFloatingPhotos);
 }
 
-/* -------------------------------
-   2. Scroll reveal for sections
-   Fades cards in as user scrolls
---------------------------------*/
+// Scroll reveal for sections, Fades cards in when scrolls
+
 const revealItems = [];
 
 function initScrollReveal() {
@@ -86,10 +76,8 @@ function revealOnScroll() {
     }
 }
 
-/* -------------------------------
-   3. Hover glow on clickable items
-   Shared effect for main actions
---------------------------------*/
+// Hover glow on clickable things, shared effect for main stuffs
+
 function initHoverGlow() {
     const clickable = document.querySelectorAll(".cv-button, .social-icon");
 
@@ -113,10 +101,8 @@ function initHoverGlow() {
     }
 }
 
-/* -------------------------------
-   4. Spotify embed on Skills page
-   Uses Spotify oEmbed API
---------------------------------*/
+// Spotify play embed on Skills page, this uses Spotify oEmbed API
+
 function initSpotifyEmbed() {
     const container = document.getElementById("spotify-embed");
     if (!container) return; // only run on Skills page
@@ -140,10 +126,8 @@ function initSpotifyEmbed() {
         });
 }
 
-/* -------------------------------
-   5. Time-based greeting on home
-   Uses Date + conditions + DOM
---------------------------------*/
+// Time-based greeting on home, this will uses Date + conditions + DOM
+
 function initTimeGreeting() {
     const el = document.getElementById("time-greeting");
     if (!el) return; // only run on homepage
@@ -162,13 +146,11 @@ function initTimeGreeting() {
     el.textContent = message;
 }
 
-/* -------------------------------
-   6. About page – rectangle image cycle
-   Uses array of data + timed switch
---------------------------------*/
+// on tha About fist with a pagerectangle image cycle, this will uses array of data + timed switch
+
 function initAboutImageCycle() {
     const imgEl = document.getElementById("aboutCycleImage");
-    if (!imgEl) return; // only run on About page
+    if (!imgEl) return; // only run on tha About page
 
     const aboutImages = [
         { src: "images/ChineseDrum2.jpg",   alt: "Kevin playing Chinese drum" },
@@ -182,7 +164,7 @@ function initAboutImageCycle() {
     imgEl.src = aboutImages[0].src;
     imgEl.alt = aboutImages[0].alt;
 
-    // change image every 5 seconds
+    // will changes the image every 5 seconds
     setInterval(function () {
         index = (index + 1) % aboutImages.length;
 
@@ -196,10 +178,7 @@ function initAboutImageCycle() {
     }, 5000);
 }
 
-/* -------------------------------
-   7. Contact page – message form
-   Simple DOM + events + validation
---------------------------------*/
+// Contact page to send message form, use DOM + events + validation
 function initContactMessageForm() {
     const form = document.getElementById("contact-message-form");
     if (!form) return; // only run on Contact page
