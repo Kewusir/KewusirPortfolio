@@ -1,28 +1,21 @@
-# Kevin Huang Wu Portfolio Website
+# Kevin Huang Wu Portfolio
 
-Single-page portfolio site designed for GitHub Pages deployment.
+Interactive portfolio website for Kevin Huang Wu, built as a static site for GitHub Pages.
 
-## Current Structure
+## Stack
 
-- `index.html`: main page content and section structure
-- `styles.css`: visual system, responsive layout and component styling
-- `main.js`: `three.js` hero background and reveal interactions
+- HTML
+- CSS
+- JavaScript
+- Three.js
 
-## Next Content To Add
+## Structure
 
-- Final profile photo
-- PDF CV file for the download button
-- LinkedIn URL
-- Project screenshots, hardware photos and testing visuals
+- `index.html` contains the single-page portfolio layout
+- `styles.css` defines the visual system, layout, and motion styling
+- `main.js` powers interactive transitions, canvas effects, and section behaviour
+- `assets/` stores portrait imagery and downloadable documents
 
-## GitHub Pages Notes
+## Deployment
 
-This version is static HTML/CSS/JavaScript, so it can be deployed directly to GitHub Pages without a build step.
-
-Recommended publish setup:
-
-1. Push the repository to GitHub.
-2. In repository settings, open `Pages`.
-3. Set source to `Deploy from a branch`.
-4. Choose the main branch and `/root`.
-5. Add your final assets, then update the placeholder links in `index.html`.
+The site is intended to be published directly through GitHub Pages from the repository root.
