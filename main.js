@@ -7,6 +7,7 @@
   const loaderParticlesCanvas = document.getElementById("loader-particles");
   const navLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"]'));
   const stages = Array.from(document.querySelectorAll(".stage"));
+  const homeStage = document.getElementById("home");
   const panelStages = stages.filter((stage) => stage.id !== "home");
   const revealItems = Array.from(
     document.querySelectorAll(
@@ -15,6 +16,10 @@
   );
 
   let activeStageId = "home";
+  const navigationEntry = performance.getEntriesByType("navigation")[0];
+  const reloadToHome =
+    navigationEntry?.type === "reload" ||
+    performance.navigation?.type === performance.navigation.TYPE_RELOAD;
 
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -25,6 +30,29 @@
     navLinks.forEach((link) => {
       link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
     });
+  }
+
+  function resetToHomeView() {
+    if (!reloadToHome) {
+      return;
+    }
+
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    const cleanUrl = `${window.location.pathname}${window.location.search}`;
+    if (window.location.hash) {
+      window.history.replaceState(null, "", cleanUrl);
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    if (homeStage) {
+      setActiveNav(homeStage.id);
+    }
   }
 
   function transitionTo(section) {
@@ -57,6 +85,11 @@
   });
 
   panelStages.forEach((stage) => stage.classList.add("stage-panel"));
+
+  resetToHomeView();
+  window.addEventListener("pageshow", () => {
+    window.requestAnimationFrame(resetToHomeView);
+  });
 
   let stageTicking = false;
 
@@ -317,8 +350,11 @@
   }
 
   window.addEventListener("load", () => {
+    resetToHomeView();
     window.setTimeout(() => {
-      void finishLoading();
+      void finishLoading().then(() => {
+        window.requestAnimationFrame(resetToHomeView);
+      });
     }, 2450);
   });
 
