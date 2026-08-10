@@ -1,77 +1,482 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <title>Kevin Huang Wu - Portfolio</title>
-    <link rel="stylesheet" href="pageStyle.css" />
-</head>
-
-<body>
-
-    <!-- top navigation bar-->
-    <div class="top-bar">
-        <div class="site-name">Kevin's Portfolio.</div>
-        <nav class="main-nav top-nav">
-            <ul>
-                <li><a class="active" href="homepage.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="skills.html">Skills &amp; Interests</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div style="clear: both;"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kevin Huang Wu | Interactive Systems Portfolio</title>
+    <meta
+      name="description"
+      content="Portfolio of Kevin Huang Wu, a Trinity College Dublin postgraduate building interactive systems across software, sensors, AI, HCI and immersive media."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-loading">
+    <div class="loader" aria-hidden="true">
+      <div class="loader__aura"></div>
+      <canvas class="loader__particles" id="loader-particles" aria-hidden="true"></canvas>
+      <div class="loader__stage">
+        <p class="loader__tag">
+          Technology / Immersive Media / UI UX / Audio Engineer / Game Developer
+        </p>
+        <p class="loader__name">Kevin Huang Wu</p>
+        <div class="loader__bar">
+          <span class="loader__progress"></span>
+        </div>
+      </div>
     </div>
 
-    <!-- main intro section -->
-    <div class="hero-card">
-        <div class="left-side">
-            <h1 class="main-heading">Hi There, I'm<br><span class="name-highlight">Kevin Huang Wu</span></h1>
-            <h2 class="role-heading">M.Phil. Music and Media Technology & M.Sc Interactive Digital Media, Trinity College Dublin</h2>
+    <div class="transition-screen" aria-hidden="true">
+      <span class="transition-screen__label">Home</span>
+    </div>
 
-            <p class="intro-text">
-                I am a creative and technically skilled postgraduate student focusing on music,
-                media technology, and immersive digital experience design, currently studying my second postgraudate degree in Interactive Digital Media in Trinity College Dublin.
-                <br><br>
-                My work bridges sound, media, and design, combining artistic storytelling
-                with modern technology to create meaningful, interactive experiences, my first master degree thesis even includes studies realeted to Brain Computer Interface game developments.
-                <br><br>
-                I am passionate about both artistic expression and technical precision,
-                aiming to produce media that feels emotional and authentic.
-            </p>
+    <header class="site-header">
+      <a class="site-brand" href="#home">KHW</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-            <!-- buttons and icons -->
-            <div class="button-row">
-                <!-- CV download link -->
-                <a class="cv-button" href="Kevin%20Huang%20Wu%20CV.pdf" download>Download CV</a>
+    <main>
+      <section class="hero stage" id="home" data-nav="home" data-transition="Kevin Huang Wu">
+        <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+        <div class="hero__glow"></div>
+        <div class="hero__inner">
+          <div class="hero__meta">
+            <p class="section-kicker">( technology &amp; interactive systems )</p>
+            <p class="hero__location">Dublin, Ireland · Irish Citizen · EU Work Authorisation</p>
+          </div>
 
-                <!-- LinkedIn icon link -->
-                <a href="https://ie.linkedin.com/in/kevin-huang-wu-749a5329a" target="_blank">
-                    <img src="images/linkedin-fill.png" alt="LinkedIn" class="social-icon">
-                </a>
+          <div class="hero__name" aria-label="Kevin Huang Wu">
+            <span data-word="Kevin">Kevin</span>
+            <span data-word="Huang">Huang</span>
+            <span data-word="Wu">Wu</span>
+          </div>
+
+          <div class="hero__lower">
+            <div class="hero__statement">
+              <p class="hero__role">Technology &amp; Interactive Systems Graduate</p>
+              <p class="hero__summary">
+                I build interactive systems that connect software, physical data, AI and
+                human experience.
+              </p>
             </div>
+
+            <div class="hero__rail">
+              <p class="hero__keywords">
+                UI / UX · Game Development · Audio Engineering · HCI · AI · Immersive Media
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="manifesto stage stage--paper" id="about" data-nav="about" data-transition="Profile">
+        <div class="manifesto__grid">
+          <div class="manifesto__intro">
+            <p class="section-kicker section-kicker--dark">( profile )</p>
+            <h2 class="manifesto__headline">
+              Not a musician who learned to code.
+              <span>A multidisciplinary technologist building interactive systems.</span>
+            </h2>
+          </div>
+
+          <div class="manifesto__copy">
+            <figure class="manifesto__portrait">
+              <div class="manifesto__portrait-stage">
+                <span class="manifesto__portrait-glow manifesto__portrait-glow--teal"></span>
+                <span class="manifesto__portrait-glow manifesto__portrait-glow--gold"></span>
+                <img
+                  class="manifesto__portrait-ghost"
+                  src="assets/kevin-portrait.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+                <img
+                  class="manifesto__portrait-image"
+                  src="assets/kevin-portrait.png"
+                  alt="Portrait of Kevin Huang Wu"
+                />
+              </div>
+            </figure>
+            <p>
+              I am a Trinity College Dublin postgraduate working across software
+              development, human-computer interaction, physical computing, immersive media
+              and audio technology.
+            </p>
+            <p>
+              My technical path began in Music Technology, then expanded through Python,
+              C#, Unity, XR, EEG, EMG, front-end development, Git, research methods and
+              AI-assisted development workflows.
+            </p>
+            <p>
+              The thread that connects my work is end-to-end ownership: research,
+              requirements, build, integrate, debug, test, analyse, improve and deliver.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects stage" id="projects" data-nav="projects" data-transition="Selected Work">
+        <div class="projects__sticky">
+          <div class="projects__header">
+            <div class="projects__title-block">
+              <p class="section-kicker">( selected work )</p>
+              <h2 class="projects__title">Projects</h2>
+            </div>
+            <div class="projects__active">
+              <p class="projects__counter" id="project-counter">Project 01</p>
+              <h3 class="projects__active-title" id="project-title">The Spirit Land</h3>
+              <p class="projects__active-subtitle" id="project-subtitle">
+                EEG-Controlled First-Person Interactive Experience
+              </p>
+            </div>
+          </div>
+
+          <div class="projects__canvas-shell">
+            <div class="projects__canvas-ui" aria-hidden="true">
+              <span class="projects__canvas-label">Signal Morph Field</span>
+              <span class="projects__canvas-hint">Scroll to reform</span>
+            </div>
+            <canvas id="project-canvas" aria-hidden="true"></canvas>
+          </div>
         </div>
 
-        <!-- right side: profile photo -->
-<div class="right-side">
-    <div class="photo-ring">
-        <img src="images/Kevin.jpg" alt="Kevin Huang Wu" class="profile-photo-home">
-    </div>
+        <div class="projects__list">
+          <article
+            class="project-card is-active"
+            data-counter="01"
+            data-title="The Spirit Land"
+            data-subtitle="EEG-Controlled First-Person Interactive Experience"
+            data-particle-text="SPIRIT|LAND"
+            data-accent="223 177 113"
+            data-secondary="158 208 198"
+          >
+            <div class="project-card__meta">
+              <span>Unity</span>
+              <span>Python</span>
+              <span>OpenBCI</span>
+              <span>EEG</span>
+              <span>HCI</span>
+            </div>
+            <h3>The Spirit Land</h3>
+            <p class="project-card__role">Unity Developer · HCI Researcher · Interaction Designer</p>
+            <p>
+              A first-person BCI experience where Alpha and Beta activity influenced
+              gameplay in real time through an OpenBCI to Python to Unity pipeline.
+            </p>
+            <ul>
+              <li>Built threshold logic, calibration flow, keyboard fallback and player feedback.</li>
+              <li>Worked across concept, narrative, environment design, UI and testing.</li>
+              <li>Evaluated usability, control, frustration, agency and immersion with participants.</li>
+            </ul>
+          </article>
 
-    <!-- time-based greeting text -->
-    <p id="time-greeting" class="time-greeting"></p>
-</div>
+          <article
+            class="project-card"
+            data-counter="02"
+            data-title="Biometric PCVR Horror Experience"
+            data-subtitle="EMG-Controlled Physical Interaction System"
+            data-particle-text="EMG|PCVR"
+            data-accent="216 117 92"
+            data-secondary="210 164 150"
+          >
+            <div class="project-card__meta">
+              <span>Unity</span>
+              <span>C#</span>
+              <span>Arduino Uno R3</span>
+              <span>EMG</span>
+              <span>PCVR</span>
+            </div>
+            <h3>Biometric PCVR Horror Experience</h3>
+            <p class="project-card__role">Project Manager · Technical Developer · Systems Integrator</p>
+            <p>
+              A 15 to 20 minute immersive horror system where muscle activity triggered
+              physical interaction in PCVR, combining custom hardware assembly with
+              repeated reliability testing.
+            </p>
+            <ul>
+              <li>Built and assembled the EMG sensing hardware used by the experience.</li>
+              <li>Tested false positives, missed detections, reset logic and contraction timing.</li>
+              <li>Integrated sensor input, gameplay events, fallback control and audio logic.</li>
+            </ul>
+          </article>
 
+          <article
+            class="project-card"
+            data-counter="03"
+            data-title="Spatial Audio & Immersion Research"
+            data-subtitle="VR, Experimental Design and User Experience Evaluation"
+            data-particle-text="SPATIAL|AUDIO"
+            data-accent="133 184 255"
+            data-secondary="126 221 214"
+          >
+            <div class="project-card__meta">
+              <span>VR</span>
+              <span>Binaural Audio</span>
+              <span>5.1</span>
+              <span>User Research</span>
+              <span>Data Analysis</span>
+            </div>
+            <h3>Spatial Audio &amp; Immersion Research</h3>
+            <p class="project-card__role">Researcher · Experimental Designer · UX Evaluator</p>
+            <p>
+              Research into how sound reproduction format changes localisation, spatial
+              perception, presence, immersion and overall user experience in audiovisual and
+              interactive contexts.
+            </p>
+            <ul>
+              <li>Designed comparative experiments for VR binaural vs stereo, and stereo vs 5.1.</li>
+              <li>Worked on ethics, participant procedures, testing, interpretation and reporting.</li>
+              <li>Used qualitative and quantitative evidence to inform immersive media evaluation.</li>
+            </ul>
+          </article>
         </div>
-        <div style="clear: both;"></div>
-    </div>
+      </section>
 
-    <!-- footer -->
-    <footer>
-        <p>&copy; 2025 TCD Interactive Digital Media Assignment Kevin Huang Wu</p>
-    </footer>
+      <section class="research stage stage--dark" id="research" data-nav="research" data-transition="Research">
+        <div class="research__grid">
+          <div class="research__lead">
+            <p class="section-kicker">( research &amp; method )</p>
+            <h2>
+              I treat interaction as something to be investigated as well as built.
+            </h2>
+          </div>
 
-    <script src="script.js"></script>
+          <div class="research__cards">
+            <article>
+              <h3>Research Design</h3>
+              <p>
+                Literature review, research questions, experimental design, REAMS ethics
+                preparation, participant documentation and structured testing.
+              </p>
+            </article>
+            <article>
+              <h3>User Evidence</h3>
+              <p>
+                Usability testing, immersion studies, qualitative feedback, quantitative
+                data, physiological data and comparative analysis.
+              </p>
+            </article>
+            <article>
+              <h3>Design Outcome</h3>
+              <p>
+                Evidence-based iteration for HCI, UX research, QA, accessibility and
+                immersive system reliability.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
 
-</body>
+      <section class="leadership stage" id="leadership" data-nav="leadership" data-transition="Leadership">
+        <div class="leadership__grid">
+          <div class="leadership__cloud">
+            <div class="leadership__field">
+              <div class="leadership__orbit leadership__orbit--one"></div>
+              <div class="leadership__orbit leadership__orbit--two"></div>
+              <div class="leadership__orbit leadership__orbit--three"></div>
+              <span class="leadership__node leadership__node--a">TCD Chinese Society</span>
+              <span class="leadership__node leadership__node--b">500+ Members</span>
+              <span class="leadership__node leadership__node--c">20+ Partners</span>
+              <span class="leadership__node leadership__node--d">Montblanc</span>
+              <span class="leadership__node leadership__node--e">Clontarf Castle</span>
+              <span class="leadership__node leadership__node--f">€14K+ Budget</span>
+              <span class="leadership__node leadership__node--g">1.3K Social Reach</span>
+              <span class="leadership__node leadership__node--h">250 Attendees</span>
+            </div>
+          </div>
+
+          <div class="leadership__panel">
+            <p class="section-kicker section-kicker--light">( leadership in numbers )</p>
+            <h2>
+              Community scale, commercial responsibility and operational delivery.
+            </h2>
+            <div class="stats-grid">
+              <article class="stat-card">
+                <p class="stat-card__value">
+                  <span data-count="500">0</span><em>+</em>
+                </p>
+                <p class="stat-card__label">Society members</p>
+              </article>
+              <article class="stat-card">
+                <p class="stat-card__value">
+                  <span data-count="20">0</span><em>+</em>
+                </p>
+                <p class="stat-card__label">Commercial partners</p>
+              </article>
+              <article class="stat-card">
+                <p class="stat-card__value">
+                  <span data-count="250">0</span>
+                </p>
+                <p class="stat-card__label">Formal event attendees</p>
+              </article>
+              <article class="stat-card stat-card--outline">
+                <p class="stat-card__value">
+                  €<span data-count="14">0</span><em>K+</em>
+                </p>
+                <p class="stat-card__label">Budget managed</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills stage stage--paper" id="skills" data-nav="skills" data-transition="Capabilities">
+        <div class="skills__inner">
+          <div class="skills__lead">
+            <p class="section-kicker section-kicker--dark">( capabilities )</p>
+            <h2>Software, UI / UX, sensors, research, immersion and AI-enabled workflows.</h2>
+            <p class="skills__intro">
+              I work across interface thinking as well as implementation: interaction
+              design, front-end behaviour, user testing, immersive systems and rapid
+              technical prototyping.
+            </p>
+          </div>
+
+          <div class="skills__constellation">
+            <div class="skills__constellation-head">
+              <p>Interactive Skill Atlas</p>
+              <p>Move across the field</p>
+            </div>
+            <canvas id="skills-canvas" aria-hidden="true"></canvas>
+            <div class="skills__constellation-map" aria-hidden="true">
+              <span class="skills__chip" style="--chip-x: 8%; --chip-y: 13%;">C#</span>
+              <span class="skills__chip" style="--chip-x: 18%; --chip-y: 12%;">C++ Basic</span>
+              <span class="skills__chip" style="--chip-x: 30%; --chip-y: 19%;">Python</span>
+              <span class="skills__chip" style="--chip-x: 45%; --chip-y: 14%;">JavaScript</span>
+              <span class="skills__chip" style="--chip-x: 59%; --chip-y: 13%;">HTML / CSS</span>
+              <span class="skills__chip" style="--chip-x: 72%; --chip-y: 18%;">jQuery</span>
+              <span class="skills__chip" style="--chip-x: 84%; --chip-y: 15%;">Front-End</span>
+
+              <span class="skills__chip" style="--chip-x: 14%; --chip-y: 29%;">Unity</span>
+              <span class="skills__chip" style="--chip-x: 25%; --chip-y: 34%;">JSON</span>
+              <span class="skills__chip" style="--chip-x: 39%; --chip-y: 31%;">UI / UX</span>
+              <span class="skills__chip" style="--chip-x: 53%; --chip-y: 28%;">Interaction Design</span>
+              <span class="skills__chip" style="--chip-x: 68%; --chip-y: 29%;">HCI</span>
+              <span class="skills__chip" style="--chip-x: 82%; --chip-y: 31%;">User Research</span>
+
+              <span class="skills__chip" style="--chip-x: 10%; --chip-y: 45%;">User Testing</span>
+              <span class="skills__chip" style="--chip-x: 25%; --chip-y: 49%;">Experimental Design</span>
+              <span class="skills__chip" style="--chip-x: 41%; --chip-y: 45%;">Data Analysis</span>
+              <span class="skills__chip" style="--chip-x: 58%; --chip-y: 45%;">Branding</span>
+              <span class="skills__chip" style="--chip-x: 75%; --chip-y: 46%;">Visual Communication</span>
+              <span class="skills__chip" style="--chip-x: 90%; --chip-y: 43%;">Semiotics</span>
+
+              <span class="skills__chip" style="--chip-x: 9%; --chip-y: 60%;">Arduino Uno</span>
+              <span class="skills__chip" style="--chip-x: 22%; --chip-y: 64%;">Arduino IDE</span>
+              <span class="skills__chip" style="--chip-x: 35%; --chip-y: 58%;">OpenBCI</span>
+              <span class="skills__chip" style="--chip-x: 46%; --chip-y: 65%;">EEG</span>
+              <span class="skills__chip" style="--chip-x: 56%; --chip-y: 59%;">EMG</span>
+              <span class="skills__chip" style="--chip-x: 66%; --chip-y: 64%;">EMG Click</span>
+              <span class="skills__chip" style="--chip-x: 79%; --chip-y: 61%;">XR / VR</span>
+              <span class="skills__chip" style="--chip-x: 90%; --chip-y: 58%;">AI / MCP</span>
+
+              <span class="skills__chip" style="--chip-x: 10%; --chip-y: 77%;">Spatial Audio</span>
+              <span class="skills__chip" style="--chip-x: 24%; --chip-y: 83%;">Binaural Audio</span>
+              <span class="skills__chip" style="--chip-x: 38%; --chip-y: 77%;">5.1 / 7.1</span>
+              <span class="skills__chip" style="--chip-x: 49%; --chip-y: 84%;">Logic Pro</span>
+              <span class="skills__chip" style="--chip-x: 59%; --chip-y: 77%;">Wwise</span>
+              <span class="skills__chip" style="--chip-x: 68%; --chip-y: 84%;">REW</span>
+              <span class="skills__chip" style="--chip-x: 78%; --chip-y: 77%;">Pure Data</span>
+              <span class="skills__chip" style="--chip-x: 90%; --chip-y: 84%;">Blender</span>
+
+              <span class="skills__chip" style="--chip-x: 12%; --chip-y: 92%;">Photoshop</span>
+              <span class="skills__chip" style="--chip-x: 26%; --chip-y: 95%;">Premiere Pro</span>
+              <span class="skills__chip" style="--chip-x: 42%; --chip-y: 92%;">After Effects</span>
+              <span class="skills__chip" style="--chip-x: 55%; --chip-y: 95%;">Audition</span>
+              <span class="skills__chip" style="--chip-x: 66%; --chip-y: 92%;">Adobe CC</span>
+              <span class="skills__chip" style="--chip-x: 78%; --chip-y: 95%;">Canva</span>
+              <span class="skills__chip skills__chip--stacked" style="--chip-x: 87%; --chip-y: 90%;">Microsoft<br />Office</span>
+              <span class="skills__chip skills__chip--stacked" style="--chip-x: 89%; --chip-y: 97%;">Google<br />Workspace</span>
+              <span class="skills__chip" style="--chip-x: 73%; --chip-y: 97%;">Canvas LMS</span>
+              <span class="skills__chip" style="--chip-x: 57%; --chip-y: 97%;">Git</span>
+            </div>
+          </div>
+
+          <p class="skills__growth-note">Still learning, still expanding this atlas, more to add.</p>
+
+          <div class="skill-rows">
+            <article class="skill-row">
+              <h3>Software</h3>
+              <p>C# · C++ (basic) · Python · JavaScript · HTML · CSS · jQuery · JSON · Git · Unity</p>
+            </article>
+            <article class="skill-row">
+              <h3>UI / UX</h3>
+              <p>
+                Interaction design · Interface behaviour · Visual communication ·
+                Branding · Semiotics · UI / UX thinking · Front-end behaviour
+              </p>
+            </article>
+            <article class="skill-row">
+              <h3>Research &amp; HCI</h3>
+              <p>
+                HCI · User research · User testing · Experimental design · Data analysis ·
+                Evidence-based iteration
+              </p>
+            </article>
+            <article class="skill-row">
+              <h3>Physical Computing</h3>
+              <p>
+                Arduino Uno R3 · Arduino IDE · OpenBCI · EMG Click · EEG · EMG ·
+                Hardware integration
+              </p>
+            </article>
+            <article class="skill-row">
+              <h3>Immersive &amp; Audio</h3>
+              <p>
+                XR / VR · Spatial audio · Binaural audio · 5.1 / 7.1 · Logic Pro · Wwise ·
+                Room EQ Wizard · Pure Data
+              </p>
+            </article>
+            <article class="skill-row">
+              <h3>Media &amp; Design Tools</h3>
+              <p>
+                Blender · Photoshop · Premiere Pro · After Effects · Audition · Adobe
+                Creative Cloud · Canva
+              </p>
+            </article>
+            <article class="skill-row">
+              <h3>AI &amp; Workflow</h3>
+              <p>
+                AI-assisted coding · MCP-enabled workflows · Technical research · Output
+                validation · Microsoft Office · Google Workspace · Canvas LMS
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact stage stage--contact" id="contact" data-nav="contact" data-transition="Contact">
+        <div class="contact__inner">
+          <p class="section-kicker">( contact )</p>
+          <h2>Open to product, software, UI / UX, immersive, QA, audio and audiovisual roles.</h2>
+          <p class="contact__roles">
+            Product Management · UI / UX · Software · HCI · Immersive Tech · QA · Audio
+            Production · Audio Engineering · Audiovisual · Creative Technology
+          </p>
+          <div class="contact__links">
+            <a href="mailto:kevin_huang_wu@icloud.com">kevin_huang_wu@icloud.com</a>
+            <a href="tel:+353873383222">087 338 3222</a>
+            <a href="https://github.com/Kewusir" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://ie.linkedin.com/in/kevin-huang-wu-749a5329a" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="assets/kevin-huang-wu-cv.pdf" download="Kevin_Huang_Wu_CV.pdf">Download CV</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
 </html>
