@@ -5,17 +5,27 @@
   const loader = document.querySelector(".loader");
   const loaderName = document.querySelector(".loader__name");
   const loaderParticlesCanvas = document.getElementById("loader-particles");
+  const siteHeader = document.querySelector(".site-header");
+  const siteBrand = document.querySelector(".site-brand");
+  const menuToggle = document.querySelector(".site-menu-toggle");
+  const siteNav = document.getElementById("site-nav");
   const navLinks = Array.from(document.querySelectorAll('.site-nav a[href^="#"]'));
   const stages = Array.from(document.querySelectorAll(".stage"));
   const homeStage = document.getElementById("home");
+  const projectsHint = document.querySelector(".projects__canvas-hint");
+  const skillsModeLabel = document.querySelector(".skills__mode-label");
   const panelStages = stages.filter((stage) => stage.id !== "home");
   const revealItems = Array.from(
     document.querySelectorAll(
       ".manifesto__intro, .manifesto__copy, .projects__sticky, .project-card, .research__lead, .research__cards article, .leadership__cloud, .leadership__panel, .skills__lead, .skills__constellation, .skill-row, .contact__inner"
     )
   );
+  const root = document.documentElement;
+  const coarsePointerQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+  const compactLayoutQuery = window.matchMedia("(max-width: 820px)");
 
   let activeStageId = "home";
+  let closeMobileNav = () => {};
   const navigationEntry = performance.getEntriesByType("navigation")[0];
   const reloadToHome =
     navigationEntry?.type === "reload" ||
@@ -29,6 +39,93 @@
     activeStageId = id;
     navLinks.forEach((link) => {
       link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+    });
+  }
+
+  function applyAdaptiveLabel(element) {
+    if (!element) {
+      return;
+    }
+
+    const nextLabel =
+      compactLayoutQuery.matches || coarsePointerQuery.matches
+        ? element.dataset.mobileLabel
+        : element.dataset.desktopLabel;
+
+    if (nextLabel) {
+      element.textContent = nextLabel;
+    }
+  }
+
+  function syncResponsiveMode() {
+    body.classList.toggle("is-touch-mode", coarsePointerQuery.matches);
+    body.classList.toggle("is-mobile-layout", compactLayoutQuery.matches);
+    applyAdaptiveLabel(projectsHint);
+    applyAdaptiveLabel(skillsModeLabel);
+  }
+
+  function setGlobalCursor(clientX, clientY) {
+    const x = `${clamp(clientX / Math.max(window.innerWidth, 1), 0, 1) * 100}%`;
+    const y = `${clamp(clientY / Math.max(window.innerHeight, 1), 0, 1) * 100}%`;
+    root.style.setProperty("--cursor-x", x);
+    root.style.setProperty("--cursor-y", y);
+  }
+
+  function initMobileNav() {
+    if (!siteHeader || !menuToggle || !siteNav) {
+      return;
+    }
+
+    function closeMenu() {
+      menuToggle.setAttribute("aria-expanded", "false");
+      siteNav.classList.remove("is-open");
+      body.classList.remove("is-nav-open");
+    }
+
+    function openMenu() {
+      menuToggle.setAttribute("aria-expanded", "true");
+      siteNav.classList.add("is-open");
+      body.classList.add("is-nav-open");
+    }
+
+    closeMobileNav = closeMenu;
+
+    menuToggle.addEventListener("click", () => {
+      if (!compactLayoutQuery.matches) {
+        return;
+      }
+
+      if (siteNav.classList.contains("is-open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    siteBrand?.addEventListener("click", closeMenu);
+
+    document.addEventListener("click", (event) => {
+      if (!compactLayoutQuery.matches || !siteNav.classList.contains("is-open")) {
+        return;
+      }
+
+      if (siteHeader.contains(event.target)) {
+        return;
+      }
+
+      closeMenu();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    compactLayoutQuery.addEventListener?.("change", () => {
+      if (!compactLayoutQuery.matches) {
+        closeMenu();
+      }
     });
   }
 
@@ -80,11 +177,18 @@
       }
 
       event.preventDefault();
+      closeMobileNav();
       transitionTo(target);
     });
   });
 
   panelStages.forEach((stage) => stage.classList.add("stage-panel"));
+
+  initMobileNav();
+  syncResponsiveMode();
+  coarsePointerQuery.addEventListener?.("change", syncResponsiveMode);
+  compactLayoutQuery.addEventListener?.("change", syncResponsiveMode);
+  window.addEventListener("resize", syncResponsiveMode);
 
   resetToHomeView();
   window.addEventListener("pageshow", () => {
@@ -358,12 +462,12 @@
     }, 2450);
   });
 
-  const root = document.documentElement;
   window.addEventListener("pointermove", (event) => {
-    const x = `${(event.clientX / window.innerWidth) * 100}%`;
-    const y = `${(event.clientY / window.innerHeight) * 100}%`;
-    root.style.setProperty("--cursor-x", x);
-    root.style.setProperty("--cursor-y", y);
+    setGlobalCursor(event.clientX, event.clientY);
+  });
+
+  window.addEventListener("pointerdown", (event) => {
+    setGlobalCursor(event.clientX, event.clientY);
   });
 
   function initHeroField() {
@@ -384,6 +488,7 @@
     let height = 0;
     let dpr = 1;
     let animationId = null;
+    let releaseTimer = null;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -424,14 +529,48 @@
       }
     }
 
-    window.addEventListener("pointermove", (event) => {
-      pointer.x = event.clientX;
-      pointer.y = event.clientY;
+    function setPointerPosition(clientX, clientY) {
+      const rect = canvas.getBoundingClientRect();
+      pointer.x = clientX - rect.left;
+      pointer.y = clientY - rect.top;
       pointer.active = true;
+    }
+
+    function schedulePointerRelease(pointerType) {
+      window.clearTimeout(releaseTimer);
+
+      if (pointerType === "touch" || coarsePointerQuery.matches) {
+        releaseTimer = window.setTimeout(() => {
+          pointer.active = false;
+        }, 1100);
+      }
+    }
+
+    const surface = canvas.closest(".hero") || canvas;
+
+    surface.addEventListener("pointerdown", (event) => {
+      setPointerPosition(event.clientX, event.clientY);
+      schedulePointerRelease(event.pointerType);
     });
 
-    window.addEventListener("pointerleave", () => {
+    surface.addEventListener("pointermove", (event) => {
+      setPointerPosition(event.clientX, event.clientY);
+      if (event.pointerType === "touch") {
+        schedulePointerRelease(event.pointerType);
+      }
+    });
+
+    surface.addEventListener("pointerleave", () => {
+      window.clearTimeout(releaseTimer);
       pointer.active = false;
+    });
+
+    surface.addEventListener("pointerup", (event) => {
+      schedulePointerRelease(event.pointerType);
+    });
+
+    surface.addEventListener("pointercancel", () => {
+      schedulePointerRelease("touch");
     });
 
     function updateNode(node, speed) {
@@ -532,6 +671,7 @@
     }
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let releaseTimer = null;
 
     function setPortraitDepth(pointerX, pointerY) {
       const rotateX = (0.5 - pointerY) * 7.5;
@@ -557,14 +697,33 @@
       return;
     }
 
-    stage.addEventListener("pointermove", (event) => {
+    function updateDepthFromEvent(event) {
       const rect = stage.getBoundingClientRect();
       const x = clamp((event.clientX - rect.left) / Math.max(rect.width, 1), 0, 1);
       const y = clamp((event.clientY - rect.top) / Math.max(rect.height, 1), 0, 1);
       setPortraitDepth(x, y);
+    }
+
+    stage.addEventListener("pointerdown", (event) => {
+      updateDepthFromEvent(event);
+      window.clearTimeout(releaseTimer);
+    });
+
+    stage.addEventListener("pointermove", (event) => {
+      updateDepthFromEvent(event);
+      if (event.pointerType === "touch") {
+        window.clearTimeout(releaseTimer);
+        releaseTimer = window.setTimeout(resetPortraitDepth, 320);
+      }
     });
 
     stage.addEventListener("pointerleave", resetPortraitDepth);
+    stage.addEventListener("pointerup", (event) => {
+      if (event.pointerType === "touch" || coarsePointerQuery.matches) {
+        window.clearTimeout(releaseTimer);
+        releaseTimer = window.setTimeout(resetPortraitDepth, 320);
+      }
+    });
     resetPortraitDepth();
   }
 
@@ -582,17 +741,23 @@
       this.dpr = 1;
       this.mouseInside = false;
       this.animationId = null;
+      this.releaseTimer = null;
       this.theme = {
         accent: "223, 177, 113",
         secondary: "158, 208, 198",
       };
 
+      this.handlePointerDown = this.handlePointerDown.bind(this);
       this.handlePointerMove = this.handlePointerMove.bind(this);
+      this.handlePointerUp = this.handlePointerUp.bind(this);
       this.handlePointerLeave = this.handlePointerLeave.bind(this);
       this.resize = this.resize.bind(this);
       this.render = this.render.bind(this);
 
+      this.canvas.addEventListener("pointerdown", this.handlePointerDown);
       this.canvas.addEventListener("pointermove", this.handlePointerMove);
+      this.canvas.addEventListener("pointerup", this.handlePointerUp);
+      this.canvas.addEventListener("pointercancel", this.handlePointerUp);
       this.canvas.addEventListener("pointerleave", this.handlePointerLeave);
       window.addEventListener("resize", this.resize);
       this.resize();
@@ -607,14 +772,41 @@
       };
     }
 
-    handlePointerMove(event) {
+    setPointerFromClient(clientX, clientY) {
       const rect = this.canvas.getBoundingClientRect();
-      this.pointer.x = event.clientX - rect.left;
-      this.pointer.y = event.clientY - rect.top;
+      this.pointer.x = clientX - rect.left;
+      this.pointer.y = clientY - rect.top;
       this.pointer.active = true;
     }
 
+    schedulePointerRelease(pointerType) {
+      window.clearTimeout(this.releaseTimer);
+
+      if (pointerType === "touch" || coarsePointerQuery.matches) {
+        this.releaseTimer = window.setTimeout(() => {
+          this.pointer.active = false;
+        }, 900);
+      }
+    }
+
+    handlePointerDown(event) {
+      this.setPointerFromClient(event.clientX, event.clientY);
+      this.schedulePointerRelease(event.pointerType);
+    }
+
+    handlePointerMove(event) {
+      this.setPointerFromClient(event.clientX, event.clientY);
+      if (event.pointerType === "touch") {
+        this.schedulePointerRelease(event.pointerType);
+      }
+    }
+
+    handlePointerUp(event) {
+      this.schedulePointerRelease(event.pointerType);
+    }
+
     handlePointerLeave() {
+      window.clearTimeout(this.releaseTimer);
       this.pointer.active = false;
     }
 
@@ -950,6 +1142,7 @@
     let height = 0;
     let dpr = 1;
     let animationId = null;
+    let releaseTimer = null;
 
     function updateCursorVariables(px, py) {
       shell.style.setProperty("--skills-cursor-x", `${(px * 100).toFixed(2)}%`);
@@ -1147,18 +1340,51 @@
       animationId = window.requestAnimationFrame(render);
     }
 
-    shell.addEventListener("pointermove", (event) => {
+    function setPointerFromEvent(event) {
       const rect = shell.getBoundingClientRect();
       pointer.x = event.clientX - rect.left;
       pointer.y = event.clientY - rect.top;
       pointer.active = true;
       updateCursorVariables(pointer.x / Math.max(width, 1), pointer.y / Math.max(height, 1));
+    }
+
+    function schedulePointerRelease(pointerType) {
+      window.clearTimeout(releaseTimer);
+
+      if (pointerType === "touch" || coarsePointerQuery.matches) {
+        releaseTimer = window.setTimeout(() => {
+          pointer.active = false;
+          updateCursorVariables(0.5, 0.5);
+          chips.forEach((chip) => chip.classList.remove("is-active"));
+        }, 1300);
+      }
+    }
+
+    shell.addEventListener("pointerdown", (event) => {
+      setPointerFromEvent(event);
+      schedulePointerRelease(event.pointerType);
+    });
+
+    shell.addEventListener("pointermove", (event) => {
+      setPointerFromEvent(event);
+      if (event.pointerType === "touch") {
+        schedulePointerRelease(event.pointerType);
+      }
     });
 
     shell.addEventListener("pointerleave", () => {
+      window.clearTimeout(releaseTimer);
       pointer.active = false;
       updateCursorVariables(0.5, 0.5);
       chips.forEach((chip) => chip.classList.remove("is-active"));
+    });
+
+    shell.addEventListener("pointerup", (event) => {
+      schedulePointerRelease(event.pointerType);
+    });
+
+    shell.addEventListener("pointercancel", () => {
+      schedulePointerRelease("touch");
     });
 
     window.addEventListener("resize", resize);
