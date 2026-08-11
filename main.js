@@ -941,6 +941,9 @@
           alpha: 0.72 + Math.random() * 0.08,
           drawAlpha: 0,
           size: 2.3 + Math.random() * 0.18,
+          phase: Math.random() * Math.PI * 2,
+          orbitRadius: 0.25 + Math.random() * 0.9,
+          orbitSpeed: 0.7 + Math.random() * 1.1,
         });
       }
     }
@@ -957,7 +960,9 @@
           [...line].every((character) => character === " " || PROJECT_DOT_FONT[character])
         );
 
-      if (canUseDotFont) {
+      const useDotFont = canUseDotFont;
+
+      if (useDotFont) {
         return this.createDotMatrixTargets(lines, options);
       }
 
@@ -968,9 +973,9 @@
       const offsetY = Number(options?.offsetY || 0);
       const glyphWidth = 5;
       const glyphHeight = 7;
-      const charGap = 1.3;
+      const charGap = 1.15;
       const spaceWidth = 2.2;
-      const lineGap = 2.5;
+      const lineGap = 2.25;
       const horizontalPadding = Math.max(30, this.width * 0.085);
       const verticalPadding = Math.max(32, this.height * 0.14);
       const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
@@ -995,11 +1000,22 @@
       const maxLineUnits = Math.max(...lineWidths, glyphWidth);
       const totalHeightUnits =
         lines.length * glyphHeight + Math.max(lines.length - 1, 0) * lineGap;
-      const step = Math.min(safeWidth / maxLineUnits, safeHeight / totalHeightUnits, 16);
-      const dotRadius = clamp(step * 0.25, 1.8, 3.3);
+      const step = Math.min(safeWidth / maxLineUnits, safeHeight / totalHeightUnits, 15);
+      const dotRadius = clamp(step * 0.19, 1.65, 2.75);
       const totalHeight = totalHeightUnits * step;
       const baseY = (this.height - totalHeight) / 2 + offsetY;
       const points = [];
+      const satelliteOffsets =
+        step >= 11
+          ? [
+              { x: -0.18, y: 0.16, scale: 0.52, alpha: 0.34, floatScale: 0.6 },
+              { x: 0.19, y: -0.15, scale: 0.46, alpha: 0.3, floatScale: 0.54 },
+              { x: 0.08, y: 0.21, scale: 0.38, alpha: 0.24, floatScale: 0.48 },
+            ]
+          : [
+              { x: -0.16, y: 0.14, scale: 0.48, alpha: 0.3, floatScale: 0.56 },
+              { x: 0.17, y: -0.13, scale: 0.42, alpha: 0.26, floatScale: 0.5 },
+            ];
 
       lines.forEach((line, lineIndex) => {
         const lineWidth = lineWidths[lineIndex] * step;
@@ -1019,12 +1035,31 @@
                 return;
               }
 
+              const cellX = lineStartX + cursorX + (columnIndex + 0.5) * step;
+              const cellY =
+                baseY +
+                (lineIndex * (glyphHeight + lineGap) + rowIndex + 0.5) * step;
+
               points.push({
-                x: lineStartX + cursorX + (columnIndex + 0.5) * step,
-                y:
-                  baseY +
-                  (lineIndex * (glyphHeight + lineGap) + rowIndex + 0.5) * step,
+                x: cellX,
+                y: cellY,
                 size: dotRadius,
+                alpha: 1,
+                floatScale: 1,
+              });
+
+              satelliteOffsets.forEach((satellite, satelliteIndex) => {
+                if ((rowIndex + columnIndex + satelliteIndex) % 2 !== 0 && step < 12.5) {
+                  return;
+                }
+
+                points.push({
+                  x: cellX + satellite.x * step,
+                  y: cellY + satellite.y * step,
+                  size: dotRadius * satellite.scale,
+                  alpha: satellite.alpha,
+                  floatScale: satellite.floatScale,
+                });
               });
             });
           });
@@ -1047,7 +1082,7 @@
       const verticalPadding = Math.max(40, this.height * 0.14);
       const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
       const safeHeight = Math.max(this.height - verticalPadding * 2, 120);
-      let fontSize = Math.min(this.width * 0.155, this.height * 0.25, 116);
+      let fontSize = Math.min(this.width * 0.16, this.height * 0.255, 122);
       let lineHeight = fontSize * 0.84;
 
       off.textAlign = "center";
@@ -1083,16 +1118,20 @@
       });
 
       const image = off.getImageData(0, 0, this.width, this.height).data;
-      const gap = this.width < 640 ? 8 : 7;
+      const gap = this.width < 640 ? 6 : 5;
+      const dotSize = this.width < 640 ? 1.95 : 1.75;
       const points = [];
 
       for (let y = 0; y < this.height; y += gap) {
         for (let x = 0; x < this.width; x += gap) {
           const alpha = image[(y * this.width + x) * 4 + 3];
-          if (alpha > 30) {
+          if (alpha > 42) {
             points.push({
               x,
               y,
+              size: dotSize,
+              alpha: 1,
+              floatScale: 1,
             });
           }
         }
@@ -1137,6 +1176,7 @@
 
     render() {
       const ctx = this.ctx;
+      const now = performance.now() * 0.0012;
       this.renderBackground();
 
       const activeParticles = Math.max(this.targets.length, 1);
@@ -1149,8 +1189,20 @@
         }
 
         const target = this.targets[i];
-        const targetX = target ? target.x : this.width / 2;
-        const targetY = target ? target.y : this.height * 0.5;
+        const floatScale = target?.floatScale || 1;
+        const floatX = target
+          ? Math.sin(now * particle.orbitSpeed + particle.phase) *
+            particle.orbitRadius *
+            floatScale
+          : 0;
+        const floatY = target
+          ? Math.cos(now * (particle.orbitSpeed * 0.9) + particle.phase) *
+            particle.orbitRadius *
+            0.78 *
+            floatScale
+          : 0;
+        const targetX = target ? target.x + floatX : this.width / 2;
+        const targetY = target ? target.y + floatY : this.height * 0.5;
         const targetSize = target?.size || 2;
         const dx = targetX - particle.x;
         const dy = targetY - particle.y;
@@ -1175,7 +1227,7 @@
         particle.y += particle.vy;
         particle.size += (targetSize - particle.size) * 0.2;
 
-        const desiredAlpha = target ? particle.alpha : 0;
+        const desiredAlpha = target ? particle.alpha * (target.alpha || 1) : 0;
         particle.drawAlpha += (desiredAlpha - particle.drawAlpha) * 0.16;
       }
 
