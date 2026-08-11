@@ -381,7 +381,6 @@ main {
 
 .stage {
   position: relative;
-  scroll-margin-top: calc(var(--header-h) + 1.2rem);
 }
 
 .stage-panel {
@@ -1591,10 +1590,6 @@ main {
 }
 
 @media (max-width: 820px) {
-  .stage {
-    scroll-margin-top: 0.4rem;
-  }
-
   .site-header {
     top: 0.75rem;
     width: min(calc(100% - 1rem), var(--max-width));

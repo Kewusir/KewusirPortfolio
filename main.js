@@ -64,11 +64,28 @@
     applyAdaptiveLabel(skillsModeLabel);
   }
 
+  function useTouchFlowMode() {
+    return coarsePointerQuery.matches || compactLayoutQuery.matches;
+  }
+
   function setGlobalCursor(clientX, clientY) {
     const x = `${clamp(clientX / Math.max(window.innerWidth, 1), 0, 1) * 100}%`;
     const y = `${clamp(clientY / Math.max(window.innerHeight, 1), 0, 1) * 100}%`;
     root.style.setProperty("--cursor-x", x);
     root.style.setProperty("--cursor-y", y);
+  }
+
+  function getPrimaryTouch(event) {
+    return event.touches?.[0] || event.changedTouches?.[0] || null;
+  }
+
+  function scrollStageIntoView(section, behavior = "smooth") {
+    const top = window.scrollY + section.getBoundingClientRect().top;
+    window.scrollTo({
+      top: Math.max(0, top),
+      left: 0,
+      behavior,
+    });
   }
 
   function initMobileNav() {
@@ -157,10 +174,7 @@
     body.classList.add("is-transitioning");
 
     window.setTimeout(() => {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      scrollStageIntoView(section);
       setActiveNav(section.id);
     }, 180);
 
@@ -539,7 +553,7 @@
     function schedulePointerRelease(pointerType) {
       window.clearTimeout(releaseTimer);
 
-      if (pointerType === "touch" || coarsePointerQuery.matches) {
+      if (pointerType === "touch" || useTouchFlowMode()) {
         releaseTimer = window.setTimeout(() => {
           pointer.active = false;
         }, 1100);
@@ -572,6 +586,37 @@
     surface.addEventListener("pointercancel", () => {
       schedulePointerRelease("touch");
     });
+
+    window.addEventListener(
+      "touchmove",
+      (event) => {
+        if (!useTouchFlowMode()) {
+          return;
+        }
+
+        const touch = getPrimaryTouch(event);
+        if (!touch) {
+          return;
+        }
+
+        setPointerPosition(touch.clientX, touch.clientY);
+        schedulePointerRelease("touch");
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!useTouchFlowMode()) {
+          return;
+        }
+
+        setPointerPosition(window.innerWidth * 0.5, window.innerHeight * 0.48);
+        schedulePointerRelease("touch");
+      },
+      { passive: true }
+    );
 
     function updateNode(node, speed) {
       node.x += node.vx * speed;
@@ -719,13 +764,42 @@
 
     stage.addEventListener("pointerleave", resetPortraitDepth);
     stage.addEventListener("pointerup", (event) => {
-      if (event.pointerType === "touch" || coarsePointerQuery.matches) {
+      if (event.pointerType === "touch" || useTouchFlowMode()) {
         window.clearTimeout(releaseTimer);
         releaseTimer = window.setTimeout(resetPortraitDepth, 320);
       }
     });
     resetPortraitDepth();
   }
+
+  const PROJECT_DOT_FONT = {
+    A: ["01110", "10001", "10001", "11111", "10001", "10001", "10001"],
+    B: ["11110", "10001", "10001", "11110", "10001", "10001", "11110"],
+    C: ["01111", "10000", "10000", "10000", "10000", "10000", "01111"],
+    D: ["11110", "10001", "10001", "10001", "10001", "10001", "11110"],
+    E: ["11111", "10000", "10000", "11110", "10000", "10000", "11111"],
+    F: ["11111", "10000", "10000", "11110", "10000", "10000", "10000"],
+    G: ["01111", "10000", "10000", "10111", "10001", "10001", "01110"],
+    H: ["10001", "10001", "10001", "11111", "10001", "10001", "10001"],
+    I: ["11111", "00100", "00100", "00100", "00100", "00100", "11111"],
+    J: ["11111", "00010", "00010", "00010", "00010", "10010", "01100"],
+    K: ["10001", "10010", "10100", "11000", "10100", "10010", "10001"],
+    L: ["10000", "10000", "10000", "10000", "10000", "10000", "11111"],
+    M: ["10001", "11011", "10101", "10101", "10001", "10001", "10001"],
+    N: ["10001", "11001", "10101", "10011", "10001", "10001", "10001"],
+    O: ["01110", "10001", "10001", "10001", "10001", "10001", "01110"],
+    P: ["11110", "10001", "10001", "11110", "10000", "10000", "10000"],
+    Q: ["01110", "10001", "10001", "10001", "10101", "10010", "01101"],
+    R: ["11110", "10001", "10001", "11110", "10100", "10010", "10001"],
+    S: ["01111", "10000", "10000", "01110", "00001", "00001", "11110"],
+    T: ["11111", "00100", "00100", "00100", "00100", "00100", "00100"],
+    U: ["10001", "10001", "10001", "10001", "10001", "10001", "01110"],
+    V: ["10001", "10001", "10001", "10001", "10001", "01010", "00100"],
+    W: ["10001", "10001", "10001", "10101", "10101", "10101", "01010"],
+    X: ["10001", "01010", "00100", "00100", "00100", "01010", "10001"],
+    Y: ["10001", "01010", "00100", "00100", "00100", "00100", "00100"],
+    Z: ["11111", "00010", "00100", "00100", "01000", "10000", "11111"],
+  };
 
   class ProjectParticleMorph {
     constructor(canvas, initialText = "PROJECT", initialOptions = {}) {
@@ -755,6 +829,8 @@
       this.handlePointerMove = this.handlePointerMove.bind(this);
       this.handlePointerUp = this.handlePointerUp.bind(this);
       this.handlePointerLeave = this.handlePointerLeave.bind(this);
+      this.handleWindowTouchMove = this.handleWindowTouchMove.bind(this);
+      this.handleWindowScroll = this.handleWindowScroll.bind(this);
       this.resize = this.resize.bind(this);
       this.render = this.render.bind(this);
 
@@ -764,6 +840,8 @@
       this.canvas.addEventListener("pointercancel", this.handlePointerUp);
       this.canvas.addEventListener("pointerleave", this.handlePointerLeave);
       window.addEventListener("resize", this.resize);
+      window.addEventListener("touchmove", this.handleWindowTouchMove, { passive: true });
+      window.addEventListener("scroll", this.handleWindowScroll, { passive: true });
       this.resize();
       this.refreshTargets();
       this.render();
@@ -786,7 +864,7 @@
     schedulePointerRelease(pointerType) {
       window.clearTimeout(this.releaseTimer);
 
-      if (pointerType === "touch" || coarsePointerQuery.matches) {
+      if (pointerType === "touch" || useTouchFlowMode()) {
         this.releaseTimer = window.setTimeout(() => {
           this.pointer.active = false;
         }, 900);
@@ -814,6 +892,29 @@
       this.pointer.active = false;
     }
 
+    handleWindowTouchMove(event) {
+      if (!useTouchFlowMode()) {
+        return;
+      }
+
+      const touch = getPrimaryTouch(event);
+      if (!touch) {
+        return;
+      }
+
+      this.setPointerFromClient(touch.clientX, touch.clientY);
+      this.schedulePointerRelease("touch");
+    }
+
+    handleWindowScroll() {
+      if (!useTouchFlowMode()) {
+        return;
+      }
+
+      this.setPointerFromClient(window.innerWidth * 0.5, window.innerHeight * 0.62);
+      this.schedulePointerRelease("touch");
+    }
+
     resize() {
       this.dpr = Math.min(window.devicePixelRatio || 1, 2);
       this.width = this.canvas.clientWidth;
@@ -837,32 +938,124 @@
           y: Math.random() * this.height,
           vx: 0,
           vy: 0,
-          alpha: 0.54 + Math.random() * 0.28,
+          alpha: 0.72 + Math.random() * 0.08,
           drawAlpha: 0,
-          size: 1.55 + Math.random() * 1.45,
+          size: 2.3 + Math.random() * 0.18,
         });
       }
     }
 
     createTargets(text, options = this.currentOptions) {
+      const lines = text
+        .split("|")
+        .map((line) => line.trim().toUpperCase())
+        .filter(Boolean);
+
+      const canUseDotFont =
+        lines.length > 0 &&
+        lines.every((line) =>
+          [...line].every((character) => character === " " || PROJECT_DOT_FONT[character])
+        );
+
+      if (canUseDotFont) {
+        return this.createDotMatrixTargets(lines, options);
+      }
+
+      return this.createCanvasTargets(lines, options);
+    }
+
+    createDotMatrixTargets(lines, options = this.currentOptions) {
+      const offsetY = Number(options?.offsetY || 0);
+      const glyphWidth = 5;
+      const glyphHeight = 7;
+      const charGap = 1.3;
+      const spaceWidth = 2.2;
+      const lineGap = 2.5;
+      const horizontalPadding = Math.max(30, this.width * 0.085);
+      const verticalPadding = Math.max(32, this.height * 0.14);
+      const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
+      const safeHeight = Math.max(this.height - verticalPadding * 2, 90);
+      const measureLineUnits = (line) => {
+        let units = 0;
+        [...line].forEach((character, index) => {
+          if (character === " ") {
+            units += spaceWidth;
+            return;
+          }
+
+          units += glyphWidth;
+          if (index < line.length - 1) {
+            units += charGap;
+          }
+        });
+        return units;
+      };
+
+      const lineWidths = lines.map(measureLineUnits);
+      const maxLineUnits = Math.max(...lineWidths, glyphWidth);
+      const totalHeightUnits =
+        lines.length * glyphHeight + Math.max(lines.length - 1, 0) * lineGap;
+      const step = Math.min(safeWidth / maxLineUnits, safeHeight / totalHeightUnits, 16);
+      const dotRadius = clamp(step * 0.25, 1.8, 3.3);
+      const totalHeight = totalHeightUnits * step;
+      const baseY = (this.height - totalHeight) / 2 + offsetY;
+      const points = [];
+
+      lines.forEach((line, lineIndex) => {
+        const lineWidth = lineWidths[lineIndex] * step;
+        const lineStartX = (this.width - lineWidth) / 2;
+        let cursorX = 0;
+
+        [...line].forEach((character, characterIndex) => {
+          if (character === " ") {
+            cursorX += spaceWidth * step;
+            return;
+          }
+
+          const glyph = PROJECT_DOT_FONT[character];
+          glyph.forEach((row, rowIndex) => {
+            [...row].forEach((value, columnIndex) => {
+              if (value !== "1") {
+                return;
+              }
+
+              points.push({
+                x: lineStartX + cursorX + (columnIndex + 0.5) * step,
+                y:
+                  baseY +
+                  (lineIndex * (glyphHeight + lineGap) + rowIndex + 0.5) * step,
+                size: dotRadius,
+              });
+            });
+          });
+
+          cursorX += glyphWidth * step;
+          if (characterIndex < line.length - 1) {
+            cursorX += charGap * step;
+          }
+        });
+      });
+
+      return points;
+    }
+
+    createCanvasTargets(lines, options = this.currentOptions) {
       const off = this.offCtx;
       off.clearRect(0, 0, this.width, this.height);
-
-      const lines = text.split("|");
       const offsetY = Number(options?.offsetY || 0);
       const horizontalPadding = Math.max(42, this.width * 0.1);
       const verticalPadding = Math.max(40, this.height * 0.14);
       const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
       const safeHeight = Math.max(this.height - verticalPadding * 2, 120);
-      let fontSize = Math.min(this.width * 0.142, this.height * 0.235, 112);
-      let lineHeight = fontSize * 0.82;
+      let fontSize = Math.min(this.width * 0.155, this.height * 0.25, 116);
+      let lineHeight = fontSize * 0.84;
 
       off.textAlign = "center";
       off.textBaseline = "middle";
       off.fillStyle = "#fff";
 
       for (let i = 0; i < 16; i += 1) {
-        off.font = `800 ${fontSize}px Syne`;
+        off.font = `700 ${fontSize}px "IBM Plex Mono"`;
         const widestLine = lines.reduce((max, line) => {
           const metrics = off.measureText(line);
           return Math.max(max, metrics.width);
@@ -877,10 +1070,10 @@
         const heightRatio = safeHeight / Math.max(totalHeight, 1);
         const ratio = Math.min(widthRatio, heightRatio, 0.94);
         fontSize *= ratio;
-        lineHeight = fontSize * 0.82;
+        lineHeight = fontSize * 0.84;
       }
 
-      off.font = `800 ${fontSize}px Syne`;
+      off.font = `700 ${fontSize}px "IBM Plex Mono"`;
       const blockHeight = fontSize + lineHeight * Math.max(lines.length - 1, 0);
       const startY = (this.height - blockHeight) / 2 + fontSize / 2 + offsetY;
 
@@ -890,7 +1083,7 @@
       });
 
       const image = off.getImageData(0, 0, this.width, this.height).data;
-      const gap = this.width < 640 ? 7 : 6;
+      const gap = this.width < 640 ? 8 : 7;
       const points = [];
 
       for (let y = 0; y < this.height; y += gap) {
@@ -958,6 +1151,7 @@
         const target = this.targets[i];
         const targetX = target ? target.x : this.width / 2;
         const targetY = target ? target.y : this.height * 0.5;
+        const targetSize = target?.size || 2;
         const dx = targetX - particle.x;
         const dy = targetY - particle.y;
 
@@ -968,10 +1162,10 @@
           const mx = particle.x - this.pointer.x;
           const my = particle.y - this.pointer.y;
           const dist = Math.hypot(mx, my);
-          if (dist < 82) {
-            const force = (82 - dist) / 82;
-            particle.vx += (mx / Math.max(dist, 1)) * force * 1.8;
-            particle.vy += (my / Math.max(dist, 1)) * force * 1.8;
+          if (dist < 70) {
+            const force = (70 - dist) / 70;
+            particle.vx += (mx / Math.max(dist, 1)) * force * 1.2;
+            particle.vy += (my / Math.max(dist, 1)) * force * 1.2;
           }
         }
 
@@ -979,35 +1173,10 @@
         particle.vy *= 0.8;
         particle.x += particle.vx;
         particle.y += particle.vy;
+        particle.size += (targetSize - particle.size) * 0.2;
 
         const desiredAlpha = target ? particle.alpha : 0;
         particle.drawAlpha += (desiredAlpha - particle.drawAlpha) * 0.16;
-      }
-
-      const drawCount = Math.min(this.targets.length, this.particles.length);
-
-      for (let i = 0; i < drawCount; i += 1) {
-        const a = this.particles[i];
-        if (a.drawAlpha < 0.2) {
-          continue;
-        }
-
-        for (let j = i + 1; j < Math.min(i + 7, drawCount); j += 1) {
-          const b = this.particles[j];
-          if (b.drawAlpha < 0.2) {
-            continue;
-          }
-          const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 18) {
-            const alpha = 0.035 * (1 - dist / 18) * Math.min(a.drawAlpha, b.drawAlpha);
-            ctx.strokeStyle = `rgba(${this.theme.secondary}, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        }
       }
 
       for (let i = 0; i < this.particles.length; i += 1) {
@@ -1378,7 +1547,7 @@
     function schedulePointerRelease(pointerType) {
       window.clearTimeout(releaseTimer);
 
-      if (pointerType === "touch" || coarsePointerQuery.matches) {
+      if (pointerType === "touch" || useTouchFlowMode()) {
         releaseTimer = window.setTimeout(() => {
           pointer.active = false;
           updateCursorVariables(0.5, 0.5);
@@ -1413,6 +1582,40 @@
     shell.addEventListener("pointercancel", () => {
       schedulePointerRelease("touch");
     });
+
+    window.addEventListener(
+      "touchmove",
+      (event) => {
+        if (!useTouchFlowMode()) {
+          return;
+        }
+
+        const touch = getPrimaryTouch(event);
+        if (!touch) {
+          return;
+        }
+
+        setPointerFromEvent(touch);
+        schedulePointerRelease("touch");
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!useTouchFlowMode()) {
+          return;
+        }
+
+        setPointerFromEvent({
+          clientX: window.innerWidth * 0.5,
+          clientY: window.innerHeight * 0.55,
+        });
+        schedulePointerRelease("touch");
+      },
+      { passive: true }
+    );
 
     window.addEventListener("resize", resize);
     updateCursorVariables(0.5, 0.5);
