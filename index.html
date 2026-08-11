@@ -55,11 +55,31 @@
     <link rel="shortcut icon" href="assets/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      (function () {
+        var hashId = window.location.hash.replace(/^#/, "");
+        var navigationEntry =
+          window.performance &&
+          typeof window.performance.getEntriesByType === "function" &&
+          window.performance.getEntriesByType("navigation")[0];
+        var isReload =
+          navigationEntry && navigationEntry.type === "reload"
+            ? true
+            : window.performance &&
+                window.performance.navigation &&
+                window.performance.navigation.type ===
+                  window.performance.navigation.TYPE_RELOAD;
+
+        if (hashId && hashId !== "home" && !isReload) {
+          document.documentElement.classList.add("is-stage-entry");
+        }
+      })();
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260811213600" />
+    <link rel="stylesheet" href="styles.css?v=20260811214500" />
   </head>
   <body class="is-loading">
     <div class="loader" aria-hidden="true">
@@ -673,6 +693,6 @@
       </section>
     </main>
 
-    <script src="main.js?v=20260811214100"></script>
+    <script src="main.js?v=20260811214500"></script>
   </body>
 </html>

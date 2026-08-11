@@ -27,6 +27,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html.is-stage-entry {
+  scroll-behavior: auto;
+}
+
 body {
   margin: 0;
   font-family: "IBM Plex Sans", sans-serif;
@@ -72,6 +76,12 @@ a {
 .loader.is-hidden {
   opacity: 0;
   visibility: hidden;
+}
+
+html.is-stage-entry .loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .loader__aura {
