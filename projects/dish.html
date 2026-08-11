@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=20260811201035" />
+    <link rel="stylesheet" href="../styles.css?v=20260811203210" />
   </head>
   <body class="project-page">
     <header class="site-header site-header--detail">
@@ -40,12 +40,16 @@
             <h1>Dish WebApp</h1>
             <p class="detail-hero__subtitle">Gamified Food Discovery App for Dublin</p>
             <p class="detail-hero__summary">
-              Dish is a team-built food exploration app designed to help users discover
-              new restaurants and dishes in Dublin. My contribution focused on backend
-              development, database structure, SQL logic and selective UI polish.
+              Dish is a team-built food discovery web app designed to help users try new
+              restaurants in Dublin with less decision fatigue. Users set their
+              preferences, receive a restaurant-and-dish recommendation, then review the
+              experience to build XP and unlock profile rewards. My contribution focused
+              on backend development, database structure, SQL logic and selective UI
+              polish.
             </p>
             <div class="detail-tags">
               <span>Team Project</span>
+              <span>Food Discovery</span>
               <span>Express</span>
               <span>MySQL</span>
               <span>SQL</span>
@@ -69,18 +73,50 @@
           <div class="detail-grid">
             <article class="detail-card">
               <p class="detail-label">Role</p>
-              <p class="detail-value">Backend Developer · Database Developer · UI Contributor</p>
+              <p class="detail-value">Backend Contributor · Database Contributor · UI Contributor</p>
             </article>
             <article class="detail-card">
               <p class="detail-label">Focus</p>
               <p class="detail-value">
-                Auth flows, profile/feed logic, SQL structure and gamified interaction.
+                Recommendation flow, profile/feed logic, SQL structure and gamified interaction.
               </p>
             </article>
             <article class="detail-card">
               <p class="detail-label">What It Shows</p>
               <p class="detail-value">
-                Team web app development, practical backend logic and database thinking.
+                Team product development, practical backend logic and gamified UX thinking.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <p class="section-kicker">( product loop )</p>
+          <h2>From preference input to repeat engagement</h2>
+          <p class="detail-note">
+            Built as a team project; this page focuses on the areas I contributed to most
+            directly.
+          </p>
+          <div class="detail-grid">
+            <article class="detail-card">
+              <p class="detail-label">Discovery Input</p>
+              <p class="detail-value">
+                Users choose cuisine, location, price range and course type instead of
+                scrolling through endless restaurant options.
+              </p>
+            </article>
+            <article class="detail-card">
+              <p class="detail-label">Recommendation Output</p>
+              <p class="detail-value">
+                The app returns one clear restaurant-and-dish suggestion, making the
+                decision moment simple and immediate.
+              </p>
+            </article>
+            <article class="detail-card">
+              <p class="detail-label">Retention Layer</p>
+              <p class="detail-value">
+                Reviews, uploads, XP and profile rewards turn discovery into a repeatable
+                habit rather than a one-off search.
               </p>
             </article>
           </div>
@@ -98,9 +134,9 @@
                 gamified tone.
               </p>
               <ul class="detail-list">
-                <li>Built and supported backend flows for auth, profile, feed, recommendations and reviews.</li>
-                <li>Worked on the database structure and SQL logic behind user state, uploads and progression.</li>
-                <li>Contributed UI details such as click feedback, gamified effects and interaction polish.</li>
+                <li>Built and supported backend flows for account, profile, feed, recommendation and review behaviour.</li>
+                <li>Worked on the database structure and SQL logic behind user state, uploads, saved activity and progression.</li>
+                <li>Contributed UI details such as click feedback, small gamified effects and interaction polish.</li>
                 <li>Helped connect content, profile customisation and XP logic into one experience loop.</li>
               </ul>
             </div>
@@ -116,14 +152,14 @@
                     <span class="detail-flow__arrow">→</span>
                     <span>SQL</span>
                     <span class="detail-flow__arrow">→</span>
-                    <span>UI</span>
+                    <span>UX</span>
                   </div>
                 </div>
               </article>
               <article class="detail-card">
                 <p class="detail-label">Contribution Lens</p>
                 <p class="detail-value">
-                  Backend stability, data structure and small interaction moments that made the product feel more playful.
+                  Backend stability, relational data structure and interaction details that made the product loop feel more playful.
                 </p>
               </article>
             </div>
@@ -132,25 +168,120 @@
 
         <section class="detail-section">
           <p class="section-kicker">( visuals )</p>
-          <h2>Visuals and process material</h2>
-          <div class="detail-gallery">
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>Home or Feed Screen</h3>
-              <p>Main interface screenshots of discovery, recommendations or restaurant browsing can go here.</p>
-              <div class="detail-placeholder__frame"></div>
+          <h2>Interface and product flow</h2>
+          <div class="detail-media-grid">
+            <article class="detail-media-card detail-media-card--wide">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-entry-flow.jpg"
+                  alt="Dish onboarding, welcome, login and account creation screens."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Entry Flow</span>
+                <h3>Onboarding, welcome and account access</h3>
+                <p>
+                  The first-touch journey establishes the product's soft, playful tone
+                  before users enter the main discovery loop. It frames Dish less like a
+                  restaurant directory and more like a guided food companion.
+                </p>
+              </div>
             </article>
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>Gamified Profile Flow</h3>
-              <p>XP, levels, avatars or profile customisation visuals can be added here later.</p>
-              <div class="detail-placeholder__frame"></div>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-feed-and-new-dish.jpg"
+                  alt="Dish feed screen beside the new dish preference selection screen."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Core Flow</span>
+                <h3>Feed plus recommendation setup</h3>
+                <p>
+                  The app combines a social feed with a focused recommendation tool,
+                  allowing users to browse what others tried while still moving quickly
+                  into their own next dish decision.
+                </p>
+              </div>
             </article>
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>Backend / Data View</h3>
-              <p>A schema sketch, route map or system diagram can be added when you send more material.</p>
-              <div class="detail-placeholder__frame"></div>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-filter-system.jpg"
+                  alt="Dish preference filters for cuisine, price and course type."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Preference Logic</span>
+                <h3>Filter states and selection controls</h3>
+                <p>
+                  This part of the experience shows the structured input layer behind the
+                  app. The backend and data model needed to support clear category logic,
+                  reliable option handling and recommendation readiness.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card detail-media-card--wide">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-loading-result-profile.jpg"
+                  alt="Dish loading, recommendation result and profile overview screens."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Recommendation Loop</span>
+                <h3>Loading, result and profile progression in one journey</h3>
+                <p>
+                  From selection to result to profile reward, the app makes the dish
+                  suggestion feel like an event. That made the handoff between system
+                  logic and front-end feedback especially important.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-profile-screen.jpg"
+                  alt="Dish profile screen showing XP progress, levels and account options."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Gamification</span>
+                <h3>Profile, XP and retention cues</h3>
+                <p>
+                  The XP bar and profile layer reinforce return behaviour. This is where
+                  the product shifts from one-time recommendation into a lightweight habit
+                  loop with visible progress.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/dish/dish-live-feed.jpg"
+                  alt="Dish live feed post showing a user review, dish rating and uploaded images."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Live Content</span>
+                <h3>Feed post with review and image upload</h3>
+                <p>
+                  User-generated posts connect the data model, profile identity and
+                  discovery interface together. Reviews and uploaded dish images help the
+                  product feel social rather than purely utility-driven.
+                </p>
+              </div>
             </article>
           </div>
         </section>
