@@ -30,6 +30,13 @@
   const reloadToHome =
     navigationEntry?.type === "reload" ||
     performance.navigation?.type === performance.navigation.TYPE_RELOAD;
+  const initialHashId = window.location.hash.replace(/^#/, "");
+  const initialHashTarget =
+    !reloadToHome && initialHashId ? document.getElementById(initialHashId) : null;
+  const initialStageTarget =
+    initialHashTarget?.classList?.contains("stage") && initialHashTarget !== homeStage
+      ? initialHashTarget
+      : null;
 
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -169,6 +176,21 @@
     }
   }
 
+  function prepareStageEntry(section) {
+    if (!section) {
+      return;
+    }
+
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+
+    section.classList.add("is-stage-visible");
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
   function transitionTo(section) {
     transitionLabel.textContent = section.dataset.transition || section.dataset.nav || section.id;
     body.classList.add("is-transitioning");
@@ -197,6 +219,7 @@
   });
 
   panelStages.forEach((stage) => stage.classList.add("stage-panel"));
+  prepareStageEntry(initialStageTarget);
 
   initMobileNav();
   syncResponsiveMode();
@@ -450,6 +473,15 @@
   const loaderDissolve = initLoaderDissolve();
 
   async function finishLoading() {
+    if (initialStageTarget) {
+      loader?.classList.add("is-hidden");
+      body.classList.remove("is-loading");
+      window.requestAnimationFrame(() => {
+        transitionTo(initialStageTarget);
+      });
+      return;
+    }
+
     if (document.fonts?.ready) {
       try {
         await document.fonts.ready;
@@ -469,11 +501,12 @@
 
   window.addEventListener("load", () => {
     resetToHomeView();
+    const loadDelay = initialStageTarget ? 0 : 2450;
     window.setTimeout(() => {
       void finishLoading().then(() => {
         window.requestAnimationFrame(resetToHomeView);
       });
-    }, 2450);
+    }, loadDelay);
   });
 
   window.addEventListener("pointermove", (event) => {

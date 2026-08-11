@@ -2027,6 +2027,9 @@ main {
   width: clamp(12rem, 19vw, 17rem);
   padding: 0;
   border: 0;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
   background: transparent;
   box-shadow: none;
   cursor: pointer;
@@ -2191,7 +2194,11 @@ main {
 
 .detail-section {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.4rem;
+}
+
+.detail-section + .detail-section {
+  margin-top: 0.55rem;
 }
 
 .detail-section h2,
