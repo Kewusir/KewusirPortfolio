@@ -280,7 +280,9 @@
   const panelObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        entry.target.classList.toggle("is-stage-visible", entry.isIntersecting);
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-stage-visible");
+        }
       });
     },
     {
