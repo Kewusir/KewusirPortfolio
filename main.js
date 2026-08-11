@@ -728,7 +728,7 @@
   }
 
   class ProjectParticleMorph {
-    constructor(canvas) {
+    constructor(canvas, initialText = "PROJECT", initialOptions = {}) {
       this.canvas = canvas;
       this.ctx = canvas.getContext("2d");
       this.offscreen = document.createElement("canvas");
@@ -746,6 +746,10 @@
         accent: "223, 177, 113",
         secondary: "158, 208, 198",
       };
+      this.currentText = initialText;
+      this.currentOptions = {
+        offsetY: Number(initialOptions?.offsetY || 0),
+      };
 
       this.handlePointerDown = this.handlePointerDown.bind(this);
       this.handlePointerMove = this.handlePointerMove.bind(this);
@@ -761,7 +765,7 @@
       this.canvas.addEventListener("pointerleave", this.handlePointerLeave);
       window.addEventListener("resize", this.resize);
       this.resize();
-      this.setText("SPIRIT|LAND");
+      this.refreshTargets();
       this.render();
     }
 
@@ -819,22 +823,39 @@
       this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
       this.offscreen.width = this.width;
       this.offscreen.height = this.height;
-      if (this.targets.length) {
-        this.setText(this.currentText || "SPIRIT|LAND");
+      if (this.width && this.height) {
+        this.refreshTargets();
       }
     }
 
-    createTargets(text) {
+    refreshTargets() {
+      this.targets = this.createTargets(this.currentText || "PROJECT", this.currentOptions);
+
+      while (this.particles.length < this.targets.length) {
+        this.particles.push({
+          x: Math.random() * this.width,
+          y: Math.random() * this.height,
+          vx: 0,
+          vy: 0,
+          alpha: 0.54 + Math.random() * 0.28,
+          drawAlpha: 0,
+          size: 1.55 + Math.random() * 1.45,
+        });
+      }
+    }
+
+    createTargets(text, options = this.currentOptions) {
       const off = this.offCtx;
       off.clearRect(0, 0, this.width, this.height);
 
       const lines = text.split("|");
+      const offsetY = Number(options?.offsetY || 0);
       const horizontalPadding = Math.max(42, this.width * 0.1);
       const verticalPadding = Math.max(40, this.height * 0.14);
       const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
       const safeHeight = Math.max(this.height - verticalPadding * 2, 120);
-      let fontSize = Math.min(this.width * 0.145, this.height * 0.24, 112);
-      let lineHeight = fontSize * 0.88;
+      let fontSize = Math.min(this.width * 0.142, this.height * 0.235, 112);
+      let lineHeight = fontSize * 0.82;
 
       off.textAlign = "center";
       off.textBaseline = "middle";
@@ -846,7 +867,7 @@
           const metrics = off.measureText(line);
           return Math.max(max, metrics.width);
         }, 0);
-        const totalHeight = lineHeight * lines.length;
+        const totalHeight = fontSize + lineHeight * Math.max(lines.length - 1, 0);
 
         if (widestLine <= safeWidth && totalHeight <= safeHeight) {
           break;
@@ -856,12 +877,12 @@
         const heightRatio = safeHeight / Math.max(totalHeight, 1);
         const ratio = Math.min(widthRatio, heightRatio, 0.94);
         fontSize *= ratio;
-        lineHeight = fontSize * 0.88;
+        lineHeight = fontSize * 0.82;
       }
 
       off.font = `800 ${fontSize}px Syne`;
-      const blockHeight = lineHeight * lines.length;
-      const startY = (this.height - blockHeight) / 2 + lineHeight / 2;
+      const blockHeight = fontSize + lineHeight * Math.max(lines.length - 1, 0);
+      const startY = (this.height - blockHeight) / 2 + fontSize / 2 + offsetY;
 
       lines.forEach((line, index) => {
         const y = startY + index * lineHeight;
@@ -887,20 +908,12 @@
       return points;
     }
 
-    setText(text) {
+    setText(text, options = {}) {
       this.currentText = text;
-      this.targets = this.createTargets(text);
-
-      while (this.particles.length < this.targets.length) {
-        this.particles.push({
-          x: Math.random() * this.width,
-          y: Math.random() * this.height,
-          vx: 0,
-          vy: 0,
-          alpha: 0.08 + Math.random() * 0.8,
-          size: 1.2 + Math.random() * 1.4,
-        });
-      }
+      this.currentOptions = {
+        offsetY: Number(options?.offsetY || 0),
+      };
+      this.refreshTargets();
     }
 
     renderBackground() {
@@ -943,13 +956,13 @@
         }
 
         const target = this.targets[i];
-        const targetX = target ? target.x : this.width / 2 + Math.sin(i * 0.37) * this.width * 0.16;
-        const targetY = target ? target.y : this.height / 2 + Math.cos(i * 0.37) * this.height * 0.16;
+        const targetX = target ? target.x : this.width / 2;
+        const targetY = target ? target.y : this.height * 0.5;
         const dx = targetX - particle.x;
         const dy = targetY - particle.y;
 
-        particle.vx += dx * 0.015;
-        particle.vy += dy * 0.015;
+        particle.vx += dx * (target ? 0.024 : 0.012);
+        particle.vy += dy * (target ? 0.024 : 0.012);
 
         if (this.pointer.active) {
           const mx = particle.x - this.pointer.x;
@@ -962,24 +975,32 @@
           }
         }
 
-        particle.vx *= 0.86;
-        particle.vy *= 0.86;
+        particle.vx *= 0.8;
+        particle.vy *= 0.8;
         particle.x += particle.vx;
         particle.y += particle.vy;
 
-        particle.drawAlpha = target ? particle.alpha : 0.08;
+        const desiredAlpha = target ? particle.alpha : 0;
+        particle.drawAlpha += (desiredAlpha - particle.drawAlpha) * 0.16;
       }
 
       const drawCount = Math.min(this.targets.length, this.particles.length);
 
       for (let i = 0; i < drawCount; i += 1) {
         const a = this.particles[i];
+        if (a.drawAlpha < 0.2) {
+          continue;
+        }
 
         for (let j = i + 1; j < Math.min(i + 7, drawCount); j += 1) {
           const b = this.particles[j];
+          if (b.drawAlpha < 0.2) {
+            continue;
+          }
           const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 26) {
-            ctx.strokeStyle = `rgba(${this.theme.secondary}, ${0.09 * (1 - dist / 26)})`;
+          if (dist < 18) {
+            const alpha = 0.035 * (1 - dist / 18) * Math.min(a.drawAlpha, b.drawAlpha);
+            ctx.strokeStyle = `rgba(${this.theme.secondary}, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -991,11 +1012,11 @@
 
       for (let i = 0; i < this.particles.length; i += 1) {
         const particle = this.particles[i];
+        if (particle.drawAlpha < 0.02) {
+          continue;
+        }
         ctx.beginPath();
-        ctx.fillStyle =
-          i < drawCount
-            ? "rgba(242, 237, 231, 0.92)"
-            : `rgba(${this.theme.accent}, 0.08)`;
+        ctx.fillStyle = `rgba(242, 237, 231, ${Math.min(particle.drawAlpha * 1.12, 0.94)})`;
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -1016,7 +1037,10 @@
       return;
     }
 
-    const morph = new ProjectParticleMorph(canvas);
+    const initialCard = cards.find((card) => card.classList.contains("is-active")) || cards[0];
+    const morph = new ProjectParticleMorph(canvas, initialCard.dataset.particleText || "PROJECT", {
+      offsetY: Number(initialCard.dataset.particleOffsetY || 0),
+    });
     let activeCard = null;
     let ticking = false;
 
@@ -1041,7 +1065,9 @@
       title.textContent = card.dataset.title;
       subtitle.textContent = card.dataset.subtitle;
       applyProjectTheme(card);
-      morph.setText(card.dataset.particleText || "PROJECT");
+      morph.setText(card.dataset.particleText || "PROJECT", {
+        offsetY: Number(card.dataset.particleOffsetY || 0),
+      });
     }
 
     function updateActiveByViewport() {
@@ -1078,6 +1104,7 @@
 
     window.addEventListener("scroll", queueUpdate, { passive: true });
     window.addEventListener("resize", queueUpdate);
+    activate(initialCard);
     queueUpdate();
   }
 
