@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=20260811203210" />
+    <link rel="stylesheet" href="../styles.css?v=20260811205800" />
   </head>
   <body class="project-page">
     <header class="site-header site-header--detail">
@@ -36,35 +36,53 @@
       <div class="project-detail__inner">
         <section class="detail-hero">
           <div class="detail-hero__panel">
-            <p class="detail-hero__eyebrow">( project 01 )</p>
-            <h1>Dish WebApp</h1>
-            <p class="detail-hero__subtitle">Gamified Food Discovery App for Dublin</p>
-            <p class="detail-hero__summary">
-              Dish is a team-built food discovery web app designed to help users try new
-              restaurants in Dublin with less decision fatigue. Users set their
-              preferences, receive a restaurant-and-dish recommendation, then review the
-              experience to build XP and unlock profile rewards. My contribution focused
-              on backend development, database structure, SQL logic and selective UI
-              polish.
-            </p>
-            <div class="detail-tags">
-              <span>Team Project</span>
-              <span>Food Discovery</span>
-              <span>Express</span>
-              <span>MySQL</span>
-              <span>SQL</span>
-              <span>UI / UX</span>
-            </div>
-            <div class="detail-actions">
-              <a class="detail-button" href="../index.html#projects">Back to Portfolio</a>
-              <a
-                class="detail-button detail-button--ghost"
-                href="https://github.com/kbyrnes-tcd/dish"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View Repo
-              </a>
+            <div class="detail-hero__layout">
+              <div class="detail-hero__content">
+                <p class="detail-hero__eyebrow">( project 01 )</p>
+                <h1>Dish WebApp</h1>
+                <p class="detail-hero__subtitle">Gamified Food Discovery App for Dublin</p>
+                <p class="detail-hero__summary">
+                  Dish is a team-built food discovery web app designed to help users try new
+                  restaurants in Dublin with less decision fatigue. Users set their
+                  preferences, receive a restaurant-and-dish recommendation, then review the
+                  experience to build XP and unlock profile rewards. My contribution focused
+                  on backend development, database structure, SQL logic and selective UI
+                  polish.
+                </p>
+                <div class="detail-tags">
+                  <span>Team Project</span>
+                  <span>Food Discovery</span>
+                  <span>Express</span>
+                  <span>MySQL</span>
+                  <span>SQL</span>
+                  <span>UI / UX</span>
+                </div>
+                <div class="detail-actions">
+                  <a class="detail-button" href="../index.html#projects">Back to Portfolio</a>
+                  <a
+                    class="detail-button detail-button--ghost"
+                    href="https://github.com/kbyrnes-tcd/dish"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Repo
+                  </a>
+                </div>
+              </div>
+
+              <div class="detail-hero__aside">
+                <button
+                  class="detail-hero__mascot"
+                  type="button"
+                  aria-label="Activate Dish mascot animation"
+                >
+                  <img
+                    src="../images/projects/dish/dish-mascot.png"
+                    alt="Dish mascot logo"
+                    loading="eager"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -294,5 +312,28 @@
         </section>
       </div>
     </main>
+
+    <script>
+      (() => {
+        const mascot = document.querySelector(".detail-hero__mascot");
+        if (!mascot) return;
+
+        let wobbleTimer;
+
+        const triggerWobble = () => {
+          mascot.classList.remove("is-wobbling");
+          void mascot.offsetWidth;
+          mascot.classList.add("is-wobbling");
+
+          clearTimeout(wobbleTimer);
+          wobbleTimer = window.setTimeout(() => {
+            mascot.classList.remove("is-wobbling");
+          }, 2400);
+        };
+
+        mascot.addEventListener("click", triggerWobble);
+        mascot.addEventListener("touchstart", triggerWobble, { passive: true });
+      })();
+    </script>
   </body>
 </html>
