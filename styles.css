@@ -2174,6 +2174,11 @@ main {
   aspect-ratio: 16 / 9;
 }
 
+.detail-video-frame--hero {
+  width: min(100%, 28.5rem);
+  justify-self: end;
+}
+
 .detail-video-frame iframe {
   display: block;
   width: 100%;
@@ -2373,6 +2378,11 @@ main {
   grid-column: 1 / -1;
 }
 
+.detail-media-card--video-feature {
+  width: min(100%, 70rem);
+  justify-self: center;
+}
+
 .detail-media-card__frame {
   overflow: hidden;
   aspect-ratio: 16 / 10;
@@ -2397,8 +2407,17 @@ main {
   object-position: center 20%;
 }
 
+.detail-media-card__frame--contain img {
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.01);
+}
+
 .detail-media-card__frame--video {
   aspect-ratio: 16 / 9;
+}
+
+.detail-media-card__frame--playthrough {
+  aspect-ratio: 16 / 8.8;
 }
 
 .detail-media-card__frame--video iframe {

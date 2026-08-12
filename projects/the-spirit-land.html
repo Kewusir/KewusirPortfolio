@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=20260812025800" />
+    <link rel="stylesheet" href="../styles.css?v=20260812032000" />
   </head>
   <body class="project-page">
     <header class="site-header site-header--detail">
@@ -44,10 +44,11 @@
                   EEG-Controlled First-Person Interactive Experience
                 </p>
                 <p class="detail-hero__summary">
-                  The Spirit Land is a first-person BCI game triggered by EEG-based
-                  relaxation and focus. Built in Unity with OpenBCI, it maps Beta activity
-                  to forward walking and Alpha relaxation to environmental events, turning
-                  physiological data into an explorable and meditative interaction loop.
+                  The Spirit Land is a first-person brain-computer interface (BCI) game
+                  triggered by electroencephalography (EEG)-based relaxation and focus.
+                  EEG is a non-invasive way of reading electrical activity from the scalp;
+                  in this project, those signals were translated into forward movement,
+                  environmental triggers and a meditative exploration loop.
                 </p>
                 <div class="detail-tags">
                   <span>Unity</span>
@@ -106,6 +107,68 @@
         </section>
 
         <section class="detail-section">
+          <p class="section-kicker">( bci / eeg )</p>
+          <div class="detail-layout">
+            <div class="detail-copy">
+              <h2>What BCI and EEG mean in this project</h2>
+              <p>
+                A brain-computer interface, or BCI, is a system that lets a computer
+                respond to brain activity instead of relying only on physical input such
+                as a mouse, keyboard or controller. In The Spirit Land, that meant the
+                player could influence walking and environmental events through mental
+                state rather than button presses alone.
+              </p>
+              <p>
+                EEG, or electroencephalography, is the non-invasive sensing method used
+                here. Electrodes placed on the scalp measure electrical activity in real
+                time. This project focused on Alpha and Beta bands because Alpha rises
+                were useful for relaxation-based triggers, while Beta rises were useful
+                for concentrated forward movement.
+              </p>
+            </div>
+
+            <div class="detail-side">
+              <article class="detail-card">
+                <p class="detail-label">BCI, in practice</p>
+                <p class="detail-value">
+                  A live control loop where the player learns how to shape mental state
+                  and the system learns how to translate that signal into readable
+                  gameplay behaviour.
+                </p>
+              </article>
+              <article class="detail-card">
+                <p class="detail-label">EEG, in practice</p>
+                <p class="detail-value">
+                  A portable non-invasive signal source that is powerful enough for
+                  creative interaction, but noisy enough that calibration, thresholds and
+                  fallback controls have to be designed carefully.
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <article class="detail-media-card detail-media-card--wide">
+            <div class="detail-media-card__frame detail-media-card__frame--contain">
+              <img
+                src="../images/projects/the-spirit-land/thesis/spirit-land-bandpower-widget.png"
+                alt="OpenBCI Band Power widget showing delta, theta, alpha, beta and gamma bands in real time."
+                loading="lazy"
+              />
+            </div>
+            <div class="detail-media-card__body">
+              <span class="detail-placeholder__tag">OpenBCI GUI</span>
+              <h3>Band Power was the main live EEG reference during calibration</h3>
+              <p>
+                The OpenBCI Band Power widget visualised delta, theta, Alpha, Beta and
+                Gamma activity in real time. In the project workflow, it acted as the
+                fastest way to see whether relaxation or concentration was rising strongly
+                enough to support the next interaction state.
+              </p>
+            </div>
+          </article>
+        </section>
+
+        <section class="detail-section">
           <p class="section-kicker">( premise )</p>
           <div class="detail-layout">
             <div class="detail-copy">
@@ -156,6 +219,74 @@
                 </p>
               </article>
             </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <p class="section-kicker">( world design )</p>
+          <h2>Three regions carried the atmosphere of the thesis into the playable build</h2>
+          <p class="detail-note">
+            The thesis was not only about signal processing. A large part of the project
+            involved building regions that felt calm, symbolic and visually readable
+            enough for BCI interaction to make sense.
+          </p>
+          <div class="detail-gallery">
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/thesis/spirit-land-scene-lake.png"
+                  alt="Unity development screenshot of the Spirit Lake region in The Spirit Land."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Spirit Lake</span>
+                <h3>The calm anchor of the world</h3>
+                <p>
+                  The lake region established the game’s meditative tone through open
+                  space, soft lighting and a readable magical trigger area that invited
+                  slower interaction.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/thesis/spirit-land-scene-flower-sea.png"
+                  alt="Unity development screenshot of the Flower Sea region in The Spirit Land."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Flower Sea</span>
+                <h3>A softer field built for wonder and pause</h3>
+                <p>
+                  The Flower Sea pushed the environment toward a more dreamlike mood,
+                  using dense floral coverage and bright trigger energy to make the scene
+                  feel rewarding rather than purely decorative.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/thesis/spirit-land-scene-dynamic-forest.png"
+                  alt="Unity development screenshot of the Dynamic Forest region in The Spirit Land."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Dynamic Forest</span>
+                <h3>A denser region for contrast and progression</h3>
+                <p>
+                  The forest introduced a more enclosed visual rhythm, giving the world a
+                  stronger sense of variation and helping the project move beyond a single
+                  mood or one-scene prototype.
+                </p>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -233,6 +364,52 @@
         </section>
 
         <section class="detail-section">
+          <p class="section-kicker">( onboarding & integration )</p>
+          <h2>Player guidance and technical wiring were both part of the design</h2>
+          <div class="detail-media-grid">
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame detail-media-card__frame--contain">
+                <img
+                  src="../images/projects/the-spirit-land/thesis/spirit-land-help-menu.png"
+                  alt="The Spirit Land in-game help menu with instructions for training, controls, OpenBCI setup and scene flow."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">In-Game Guidance</span>
+                <h3>The build explained itself before asking the player to perform</h3>
+                <p>
+                  The help menu sat inside the experience instead of outside it. It
+                  reminded players to complete relaxation and focus training first,
+                  clarified the hybrid control scheme, and made the OpenBCI connection
+                  requirements visible before play began.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame detail-media-card__frame--contain">
+                <img
+                  src="../images/projects/the-spirit-land/thesis/spirit-land-openbci-receiver-port.png"
+                  alt="Unity inspector showing the OpenBCI receiver script listening on port 3059."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Unity Integration</span>
+                <h3>Unity listened for cleaned EEG data through a dedicated receiver</h3>
+                <p>
+                  On the implementation side, the OpenBCI receiver inside Unity listened
+                  on port 3059 for re-formatted data forwarded from Python. That let the
+                  project separate raw signal handling from gameplay logic while keeping
+                  the control loop responsive enough for live interaction.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="detail-section">
           <p class="section-kicker">( evaluation )</p>
           <h2>Small-scale testing showed strong atmosphere and useful support tools</h2>
           <p class="detail-note">
@@ -282,8 +459,8 @@
             The trailer gives the fast overview, while the full playthrough shows the
             pacing, calibration flow and how the world responds during longer interaction.
           </p>
-          <article class="detail-media-card detail-media-card--wide">
-            <div class="detail-media-card__frame detail-media-card__frame--video">
+          <article class="detail-media-card detail-media-card--wide detail-media-card--video-feature">
+            <div class="detail-media-card__frame detail-media-card__frame--video detail-media-card__frame--playthrough">
               <iframe
                 src="https://www.youtube-nocookie.com/embed/1F8tKpv1GVA?rel=0&modestbranding=1"
                 title="The Spirit Land playthrough"
