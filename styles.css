@@ -2408,6 +2408,18 @@ main {
   right: clamp(2.25rem, 4vw, 4rem);
 }
 
+.detail-hero__mascot--temple {
+  top: clamp(5.25rem, 10vw, 7.8rem);
+  right: clamp(1.4rem, 5.6vw, 4.8rem);
+  width: clamp(10.5rem, 22vw, 18rem);
+}
+
+.detail-hero__mascot--temple img {
+  filter:
+    drop-shadow(0 24px 34px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 0 42px rgba(124, 92, 255, 0.12));
+}
+
 .detail-hero__mascot img {
   display: block;
   width: 100%;
@@ -2782,6 +2794,10 @@ main {
 
 .detail-media-card__frame--showcase-wide img {
   object-position: center 20%;
+}
+
+.detail-media-card__frame--temple-home img {
+  object-position: center top;
 }
 
 .detail-media-card__frame--contain img {
@@ -3536,6 +3552,14 @@ main {
     right: auto;
     margin-top: 0.6rem;
     width: min(100%, 13rem);
+  }
+
+  .detail-hero__mascot--temple {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 0.7rem;
+    width: min(100%, 11rem);
   }
 
   .detail-media-card {
