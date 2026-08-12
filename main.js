@@ -287,7 +287,6 @@
     });
   });
 
-  panelStages.forEach((stage) => stage.classList.add("stage-panel"));
   prepareStageEntry(initialStageTarget);
 
   initMobileNav();
@@ -919,6 +918,7 @@
       this.handleWindowScroll = this.handleWindowScroll.bind(this);
       this.resize = this.resize.bind(this);
       this.render = this.render.bind(this);
+      this.handleFontsReady = this.handleFontsReady.bind(this);
 
       this.canvas.addEventListener("pointerdown", this.handlePointerDown);
       this.canvas.addEventListener("pointermove", this.handlePointerMove);
@@ -930,7 +930,18 @@
       window.addEventListener("scroll", this.handleWindowScroll, { passive: true });
       this.resize();
       this.refreshTargets();
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(this.handleFontsReady).catch(() => {});
+      }
       this.render();
+    }
+
+    handleFontsReady() {
+      if (!this.width || !this.height) {
+        return;
+      }
+
+      this.refreshTargets();
     }
 
     setTheme(theme) {
@@ -1036,12 +1047,19 @@
       off.clearRect(0, 0, this.width, this.height);
       const lines = text.split("|");
       const offsetY = Number(options?.offsetY || 0);
-      const horizontalPadding = Math.max(42, this.width * 0.1);
-      const verticalPadding = Math.max(40, this.height * 0.14);
+      const compactMode = this.width <= 820 || useTouchFlowMode();
+      const horizontalPadding = compactMode
+        ? Math.max(18, this.width * 0.07)
+        : Math.max(42, this.width * 0.1);
+      const verticalPadding = compactMode
+        ? Math.max(24, this.height * 0.11)
+        : Math.max(40, this.height * 0.14);
       const safeWidth = Math.max(this.width - horizontalPadding * 2, 120);
       const safeHeight = Math.max(this.height - verticalPadding * 2, 120);
-      let fontSize = Math.min(this.width * 0.142, this.height * 0.235, 112);
-      let lineHeight = fontSize * 0.82;
+      let fontSize = compactMode
+        ? Math.min(this.width * 0.2, this.height * 0.28, 94)
+        : Math.min(this.width * 0.142, this.height * 0.235, 112);
+      let lineHeight = fontSize * (compactMode ? 0.9 : 0.82);
 
       off.textAlign = "center";
       off.textBaseline = "middle";
@@ -1063,7 +1081,7 @@
         const heightRatio = safeHeight / Math.max(totalHeight, 1);
         const ratio = Math.min(widthRatio, heightRatio, 0.94);
         fontSize *= ratio;
-        lineHeight = fontSize * 0.82;
+        lineHeight = fontSize * (compactMode ? 0.9 : 0.82);
       }
 
       off.font = `800 ${fontSize}px Syne`;
@@ -1076,16 +1094,18 @@
       });
 
       const image = off.getImageData(0, 0, this.width, this.height).data;
-      const gap = this.width < 640 ? 7 : 6;
+      const gap = compactMode ? (this.width < 420 ? 5 : 4.6) : this.width < 640 ? 5.8 : 5.1;
       const points = [];
 
       for (let y = 0; y < this.height; y += gap) {
         for (let x = 0; x < this.width; x += gap) {
-          const alpha = image[(y * this.width + x) * 4 + 3];
+          const sampleX = clamp(Math.round(x), 0, this.width - 1);
+          const sampleY = clamp(Math.round(y), 0, this.height - 1);
+          const alpha = image[(sampleY * this.width + sampleX) * 4 + 3];
           if (alpha > 30) {
             points.push({
-              x,
-              y,
+              x: sampleX,
+              y: sampleY,
             });
           }
         }
@@ -1217,18 +1237,32 @@
     const title = document.getElementById("project-title");
     const subtitle = document.getElementById("project-subtitle");
     const section = document.getElementById("projects");
+    const list = section?.querySelector(".projects__list");
+    const viewport = section?.querySelector(".projects__viewport");
+    const prevButton = section?.querySelector(".projects__nav--prev");
+    const nextButton = section?.querySelector(".projects__nav--next");
     const cards = Array.from(document.querySelectorAll(".project-card"));
 
-    if (!canvas || !cards.length || !section) {
+    if (!canvas || !cards.length || !section || !list || !viewport) {
       return;
     }
 
     const initialCard = cards.find((card) => card.classList.contains("is-active")) || cards[0];
-    const morph = new ProjectParticleMorph(canvas, initialCard.dataset.particleText || "PROJECT", {
+    function getParticleText(card) {
+      if (compactLayoutQuery.matches || coarsePointerQuery.matches) {
+        return card.dataset.particleTextMobile || card.dataset.particleText || "PROJECT";
+      }
+      return card.dataset.particleText || "PROJECT";
+    }
+
+    const morph = new ProjectParticleMorph(canvas, getParticleText(initialCard), {
       offsetY: Number(initialCard.dataset.particleOffsetY || 0),
     });
     let activeCard = null;
-    let ticking = false;
+    let activeIndex = Math.max(cards.indexOf(initialCard), 0);
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let pointerActive = false;
 
     function applyProjectTheme(card) {
       const accentValue = card.dataset.accent || "223 177 113";
@@ -1251,47 +1285,109 @@
       title.textContent = card.dataset.title;
       subtitle.textContent = card.dataset.subtitle;
       applyProjectTheme(card);
-      morph.setText(card.dataset.particleText || "PROJECT", {
+      morph.setText(getParticleText(card), {
         offsetY: Number(card.dataset.particleOffsetY || 0),
       });
     }
 
-    function updateActiveByViewport() {
-      ticking = false;
-      const sectionRect = section.getBoundingClientRect();
-      if (sectionRect.bottom < 0 || sectionRect.top > window.innerHeight) {
+    function updateNavState() {
+      prevButton?.classList.toggle("is-disabled", activeIndex <= 0);
+      nextButton?.classList.toggle("is-disabled", activeIndex >= cards.length - 1);
+    }
+
+    function syncProjectView({ preserveParticle = false } = {}) {
+      const card = cards[activeIndex];
+      if (!card) {
         return;
       }
 
-      const activationLine = window.innerWidth < 1100 ? window.innerHeight * 0.48 : window.innerHeight * 0.42;
-      let closestCard = cards[0];
-      let closestDistance = Infinity;
-
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const distance = Math.abs(center - activationLine);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestCard = card;
-        }
+      list.style.setProperty("--project-index", String(activeIndex));
+      cards.forEach((item, index) => {
+        item.classList.toggle("is-active", index === activeIndex);
       });
 
-      activate(closestCard);
+      if (preserveParticle && activeCard === card) {
+        counter.textContent = `Project ${card.dataset.counter}`;
+        title.textContent = card.dataset.title;
+        subtitle.textContent = card.dataset.subtitle;
+        applyProjectTheme(card);
+      } else {
+        activate(card);
+      }
+
+      updateNavState();
     }
 
-    function queueUpdate() {
-      if (ticking) {
+    function setProjectIndex(nextIndex) {
+      const clampedIndex = Math.max(0, Math.min(cards.length - 1, nextIndex));
+      if (clampedIndex === activeIndex) {
+        updateNavState();
         return;
       }
-      ticking = true;
-      window.requestAnimationFrame(updateActiveByViewport);
+
+      activeIndex = clampedIndex;
+      syncProjectView();
     }
 
-    window.addEventListener("scroll", queueUpdate, { passive: true });
-    window.addEventListener("resize", queueUpdate);
-    activate(initialCard);
-    queueUpdate();
+    prevButton?.addEventListener("click", () => {
+      setProjectIndex(activeIndex - 1);
+    });
+
+    nextButton?.addEventListener("click", () => {
+      setProjectIndex(activeIndex + 1);
+    });
+
+    viewport.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) {
+        return;
+      }
+
+      pointerActive = true;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+    });
+
+    viewport.addEventListener("pointerup", (event) => {
+      if (!pointerActive) {
+        return;
+      }
+
+      pointerActive = false;
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+
+      if (Math.abs(deltaX) < 44 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+        return;
+      }
+
+      if (deltaX < 0) {
+        setProjectIndex(activeIndex + 1);
+      } else {
+        setProjectIndex(activeIndex - 1);
+      }
+    });
+
+    viewport.addEventListener("pointercancel", () => {
+      pointerActive = false;
+    });
+
+    viewport.addEventListener("pointerleave", (event) => {
+      if (!pointerActive || event.pointerType !== "mouse") {
+        return;
+      }
+
+      pointerActive = false;
+    });
+
+    window.addEventListener("resize", () => {
+      syncProjectView({ preserveParticle: true });
+    });
+
+    compactLayoutQuery.addEventListener?.("change", () => {
+      syncProjectView({ preserveParticle: true });
+    });
+
+    syncProjectView();
   }
 
   function initStatsCounter() {
