@@ -2360,6 +2360,13 @@ main {
   gap: 1rem;
 }
 
+.detail-media-grid--technical {
+  width: min(100%, 60rem);
+  margin: 0 auto;
+  align-items: start;
+  gap: 0.9rem;
+}
+
 .detail-media-card {
   display: grid;
   gap: 1rem;
@@ -2390,6 +2397,20 @@ main {
 
 .detail-media-card--visual-compact {
   width: min(100%, 52rem);
+  justify-self: center;
+}
+
+.detail-media-card--bridge-tight {
+  width: min(100%, 42rem);
+}
+
+.detail-media-card--menu-compact {
+  width: min(100%, 25.5rem);
+  justify-self: center;
+}
+
+.detail-media-card--receiver-compact {
+  width: min(100%, 22rem);
   justify-self: center;
 }
 
@@ -2437,25 +2458,25 @@ main {
 }
 
 .detail-media-card__frame--bandpower {
-  aspect-ratio: 16 / 7.2;
+  aspect-ratio: 16 / 6.2;
   background: rgba(248, 248, 248, 0.96);
 }
 
 .detail-media-card__frame--menu {
-  aspect-ratio: 10 / 12;
+  aspect-ratio: 10 / 9.4;
 }
 
 .detail-media-card__frame--receiver {
-  aspect-ratio: 16 / 8.6;
+  aspect-ratio: 16 / 6.4;
   background: rgba(248, 248, 248, 0.96);
 }
 
 .detail-media-card__frame--bridge-scene {
-  aspect-ratio: 16 / 7.2;
+  aspect-ratio: 16 / 6.25;
 }
 
 .detail-media-card__frame--bridge-photo {
-  aspect-ratio: 16 / 8.6;
+  aspect-ratio: 16 / 6.9;
 }
 
 .detail-media-card__frame--visual-balance {
@@ -2498,7 +2519,7 @@ main {
 
 .detail-media-card__body {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
 .detail-media-card__body h3 {
@@ -2620,6 +2641,13 @@ main {
   }
 
   .detail-media-card--visual-compact {
+    width: 100%;
+  }
+
+  .detail-media-card--bridge-tight,
+  .detail-media-card--menu-compact,
+  .detail-media-card--receiver-compact,
+  .detail-media-grid--technical {
     width: 100%;
   }
 
