@@ -2270,11 +2270,11 @@ main {
 }
 
 .detail-section--bridge-focus {
-  gap: 1.05rem;
+  gap: 0.95rem;
 }
 
 .detail-section--technical-focus {
-  gap: 1rem;
+  gap: 0.92rem;
 }
 
 .detail-section + .detail-section {
@@ -2369,12 +2369,12 @@ main {
 }
 
 .detail-media-grid--technical {
-  width: min(100%, 54rem);
+  width: min(100%, 48rem);
   margin: 0 auto;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.84fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
   align-items: start;
   justify-content: center;
-  gap: 0.8rem;
+  gap: 0.72rem;
 }
 
 .detail-media-card {
@@ -2411,21 +2411,23 @@ main {
 }
 
 .detail-media-card--bridge-tight {
-  width: min(100%, 38rem);
+  width: min(100%, 34rem);
 }
 
 .detail-media-card--menu-compact {
-  width: min(100%, 22rem);
+  width: 100%;
+  max-width: 20rem;
   justify-self: center;
-  gap: 0.8rem;
-  padding: 0.85rem;
+  gap: 0.72rem;
+  padding: 0.78rem;
 }
 
 .detail-media-card--receiver-compact {
-  width: min(100%, 19rem);
+  width: 100%;
+  max-width: 16.75rem;
   justify-self: center;
-  gap: 0.8rem;
-  padding: 0.85rem;
+  gap: 0.72rem;
+  padding: 0.78rem;
 }
 
 .detail-media-card__frame {
@@ -2477,20 +2479,20 @@ main {
 }
 
 .detail-media-card__frame--menu {
-  aspect-ratio: 10 / 8.55;
+  aspect-ratio: 10 / 7.6;
 }
 
 .detail-media-card__frame--receiver {
-  aspect-ratio: 16 / 5.4;
+  aspect-ratio: 16 / 4.85;
   background: rgba(248, 248, 248, 0.96);
 }
 
 .detail-media-card__frame--bridge-scene {
-  aspect-ratio: 16 / 5.8;
+  aspect-ratio: 16 / 5.2;
 }
 
 .detail-media-card__frame--bridge-photo {
-  aspect-ratio: 16 / 6.15;
+  aspect-ratio: 16 / 5.6;
 }
 
 .detail-media-card__frame--visual-balance {
@@ -2544,7 +2546,30 @@ main {
 
 .detail-section--bridge-focus .detail-media-card--bridge-tight,
 .detail-section--technical-focus .detail-media-grid--technical {
-  margin-top: -0.2rem;
+  margin-top: -0.28rem;
+}
+
+.detail-section--bridge-focus > h2,
+.detail-section--technical-focus > h2 {
+  max-width: 18ch;
+}
+
+.detail-section--bridge-focus > h2 {
+  font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+}
+
+.detail-section--technical-focus > h2 {
+  font-size: clamp(1.66rem, 2.34vw, 2.3rem);
+}
+
+.detail-section--technical-focus .detail-media-card__body h3 {
+  font-size: clamp(1rem, 1.38vw, 1.22rem);
+}
+
+.detail-section--technical-focus .detail-media-card__body p,
+.detail-section--bridge-focus .detail-media-card__body p {
+  font-size: 0.92rem;
+  line-height: 1.64;
 }
 
 .detail-media-card--bridge-tight .detail-media-card__body h3,
