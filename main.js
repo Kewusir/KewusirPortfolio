@@ -176,6 +176,29 @@
     }
   }
 
+  function setStagePathVisible(section) {
+    const targetIndex = panelStages.indexOf(section);
+    if (targetIndex === -1) {
+      return;
+    }
+
+    panelStages.slice(0, targetIndex + 1).forEach((stage) => {
+      stage.classList.add("is-stage-visible");
+    });
+
+    revealItems.forEach((item) => {
+      const hostStage = item.closest(".stage");
+      if (!hostStage) {
+        return;
+      }
+
+      const hostStageIndex = panelStages.indexOf(hostStage);
+      if (hostStageIndex !== -1 && hostStageIndex <= targetIndex) {
+        item.classList.add("is-visible");
+      }
+    });
+  }
+
   function prepareStageEntry(section) {
     if (!section) {
       return;
@@ -185,10 +208,22 @@
       window.history.scrollRestoration = "manual";
     }
 
-    section.classList.add("is-stage-visible");
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    setStagePathVisible(section);
+  }
+
+  function finalizeStageEntry(section) {
+    if (!section) {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        scrollStageIntoView(section, "auto");
+        setActiveNav(section.id);
+        queueStageUpdate();
+        document.documentElement.classList.remove("is-stage-entry");
+      });
+    });
   }
 
   function transitionTo(section) {
@@ -476,11 +511,17 @@
 
   async function finishLoading() {
     if (initialStageTarget) {
+      if (document.fonts?.ready) {
+        try {
+          await document.fonts.ready;
+        } catch {
+          // Ignore font readiness errors and continue the entry sequence.
+        }
+      }
+
       loader?.classList.add("is-hidden");
       body.classList.remove("is-loading");
-      window.requestAnimationFrame(() => {
-        transitionTo(initialStageTarget);
-      });
+      finalizeStageEntry(initialStageTarget);
       return;
     }
 
