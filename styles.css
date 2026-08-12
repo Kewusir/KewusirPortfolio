@@ -2797,7 +2797,18 @@ main {
 }
 
 .detail-media-card__frame--temple-home img {
+  object-fit: contain;
   object-position: center top;
+  background: rgba(8, 16, 20, 0.92);
+}
+
+.detail-media-card__frame--temple-home {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(0.7rem, 1.2vw, 1rem);
+  aspect-ratio: 16 / 8.2;
+  background: rgba(8, 16, 20, 0.82);
 }
 
 .detail-media-card__frame--contain img {
