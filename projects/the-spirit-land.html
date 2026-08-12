@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=20260812032000" />
+    <link rel="stylesheet" href="../styles.css?v=20260812050000" />
   </head>
   <body class="project-page">
     <header class="site-header site-header--detail">
@@ -147,8 +147,10 @@
             </div>
           </div>
 
-          <article class="detail-media-card detail-media-card--wide">
-            <div class="detail-media-card__frame detail-media-card__frame--contain">
+          <article class="detail-media-card detail-media-card--wide detail-media-card--compact">
+            <div
+              class="detail-media-card__frame detail-media-card__frame--contain detail-media-card__frame--technical detail-media-card__frame--bandpower"
+            >
               <img
                 src="../images/projects/the-spirit-land/thesis/spirit-land-bandpower-widget.png"
                 alt="OpenBCI Band Power widget showing delta, theta, alpha, beta and gamma bands in real time."
@@ -288,6 +290,26 @@
               </div>
             </article>
           </div>
+
+          <article class="detail-media-card detail-media-card--wide detail-media-card--compact">
+            <div class="detail-media-card__frame detail-media-card__frame--bridge-scene">
+              <img
+                src="../images/projects/the-spirit-land/thesis/spirit-land-scene-bridge.png"
+                alt="Unity development screenshot of the bridge reveal sequence in The Spirit Land."
+                loading="lazy"
+              />
+            </div>
+            <div class="detail-media-card__body">
+              <span class="detail-placeholder__tag">Bridge Trigger</span>
+              <h3>Relaxation could turn the bridge from absence into access</h3>
+              <p>
+                The bridge scene was one of the clearest examples of Alpha-driven
+                interaction design. Instead of using relaxation as a hidden background
+                metric, the game visualised success by opening a path forward, letting
+                players feel that calm mental control had physically changed the world.
+              </p>
+            </div>
+          </article>
         </section>
 
         <section class="detail-section">
@@ -368,7 +390,9 @@
           <h2>Player guidance and technical wiring were both part of the design</h2>
           <div class="detail-media-grid">
             <article class="detail-media-card">
-              <div class="detail-media-card__frame detail-media-card__frame--contain">
+              <div
+                class="detail-media-card__frame detail-media-card__frame--contain detail-media-card__frame--technical detail-media-card__frame--menu"
+              >
                 <img
                   src="../images/projects/the-spirit-land/thesis/spirit-land-help-menu.png"
                   alt="The Spirit Land in-game help menu with instructions for training, controls, OpenBCI setup and scene flow."
@@ -388,7 +412,9 @@
             </article>
 
             <article class="detail-media-card">
-              <div class="detail-media-card__frame detail-media-card__frame--contain">
+              <div
+                class="detail-media-card__frame detail-media-card__frame--contain detail-media-card__frame--technical detail-media-card__frame--receiver"
+              >
                 <img
                   src="../images/projects/the-spirit-land/thesis/spirit-land-openbci-receiver-port.png"
                   alt="Unity inspector showing the OpenBCI receiver script listening on port 3059."

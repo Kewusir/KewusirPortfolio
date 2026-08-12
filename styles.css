@@ -2383,6 +2383,11 @@ main {
   justify-self: center;
 }
 
+.detail-media-card--compact {
+  width: min(100%, 58rem);
+  justify-self: center;
+}
+
 .detail-media-card__frame {
   overflow: hidden;
   aspect-ratio: 16 / 10;
@@ -2410,6 +2415,38 @@ main {
 .detail-media-card__frame--contain img {
   object-fit: contain;
   background: rgba(255, 255, 255, 0.01);
+}
+
+.detail-media-card__frame--technical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.55rem, 1.35vw, 0.95rem);
+}
+
+.detail-media-card__frame--technical img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.detail-media-card__frame--bandpower {
+  aspect-ratio: 16 / 7.2;
+  background: rgba(248, 248, 248, 0.96);
+}
+
+.detail-media-card__frame--menu {
+  aspect-ratio: 10 / 12;
+}
+
+.detail-media-card__frame--receiver {
+  aspect-ratio: 16 / 8.6;
+  background: rgba(248, 248, 248, 0.96);
+}
+
+.detail-media-card__frame--bridge-scene {
+  aspect-ratio: 16 / 7.2;
 }
 
 .detail-media-card__frame--video {
@@ -2544,6 +2581,10 @@ main {
 
   .detail-media-card--wide {
     grid-column: auto;
+  }
+
+  .detail-media-card--compact {
+    width: 100%;
   }
 
   .detail-hero__media {

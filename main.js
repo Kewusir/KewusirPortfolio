@@ -31,8 +31,12 @@
     navigationEntry?.type === "reload" ||
     performance.navigation?.type === performance.navigation.TYPE_RELOAD;
   const initialUrlParams = new URLSearchParams(window.location.search);
+  const storedSection =
+    window.sessionStorage?.getItem("portfolio-return-section") || "";
   const initialHashId =
-    window.location.hash.replace(/^#/, "") || initialUrlParams.get("section") || "";
+    window.location.hash.replace(/^#/, "") ||
+    initialUrlParams.get("section") ||
+    storedSection;
   const initialHashTarget =
     !reloadToHome && initialHashId ? document.getElementById(initialHashId) : null;
   const initialStageTarget =
@@ -103,6 +107,18 @@
     const search = params.toString();
     const hash = stageId ? `#${stageId}` : "";
     return `${window.location.pathname}${search ? `?${search}` : ""}${hash}`;
+  }
+
+  function rememberStageReturn(stageId = "") {
+    if (!window.sessionStorage) {
+      return;
+    }
+
+    if (stageId) {
+      window.sessionStorage.setItem("portfolio-return-section", stageId);
+    } else {
+      window.sessionStorage.removeItem("portfolio-return-section");
+    }
   }
 
   function initMobileNav() {
@@ -177,6 +193,8 @@
       window.history.replaceState(null, "", cleanUrl);
     }
 
+    rememberStageReturn("");
+
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
@@ -192,9 +210,11 @@
       return;
     }
 
-    panelStages.slice(0, targetIndex + 1).forEach((stage) => {
-      stage.classList.add("is-stage-visible");
+    panelStages.forEach((stage) => {
+      stage.classList.remove("is-stage-visible");
     });
+
+    section.classList.add("is-stage-visible");
 
     revealItems.forEach((item) => {
       const hostStage = item.closest(".stage");
@@ -203,7 +223,7 @@
       }
 
       const hostStageIndex = panelStages.indexOf(hostStage);
-      if (hostStageIndex !== -1 && hostStageIndex <= targetIndex) {
+      if (hostStageIndex !== -1 && hostStageIndex === targetIndex) {
         item.classList.add("is-visible");
       }
     });
@@ -230,6 +250,7 @@
       window.requestAnimationFrame(() => {
         scrollStageIntoView(section, "auto");
         setActiveNav(section.id);
+        rememberStageReturn(section.id);
         window.history.replaceState(null, "", buildStageUrl(section.id));
         queueStageUpdate();
         document.documentElement.classList.remove("is-stage-entry");
@@ -244,6 +265,7 @@
     window.setTimeout(() => {
       scrollStageIntoView(section);
       setActiveNav(section.id);
+      rememberStageReturn(section.id);
       window.history.replaceState(null, "", buildStageUrl(section.id));
     }, 180);
 
@@ -309,6 +331,7 @@
 
     if (nextStage) {
       setActiveNav(nextStage.id);
+      rememberStageReturn(nextStage.id === "home" ? "" : nextStage.id);
     }
   }
 
@@ -563,6 +586,10 @@
       });
     }, loadDelay);
   });
+
+  if (!initialStageTarget && !reloadToHome) {
+    rememberStageReturn("");
+  }
 
   window.addEventListener("pointermove", (event) => {
     setGlobalCursor(event.clientX, event.clientY);
