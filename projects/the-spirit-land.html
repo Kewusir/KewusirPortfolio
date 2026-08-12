@@ -15,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css?v=20260811214500" />
+    <link rel="stylesheet" href="../styles.css?v=20260812021000" />
   </head>
   <body class="project-page">
     <header class="site-header site-header--detail">
@@ -23,38 +23,59 @@
       <nav class="site-nav site-nav--detail" aria-label="Primary">
         <a href="../index.html#home">Home</a>
         <a href="../index.html#about">About</a>
-        <a class="is-active" href="../index.html#projects">Projects</a>
+        <a class="is-active" href="../index.html?section=projects#projects">Projects</a>
         <a href="../index.html#research">Research</a>
         <a href="../index.html#leadership">Leadership</a>
         <a href="../index.html#skills">Skills</a>
         <a href="../index.html#contact">Contact</a>
       </nav>
-      <a class="detail-back" href="../index.html#projects">Back to Projects</a>
+      <a class="detail-back" href="../index.html?section=projects#projects">Back to Projects</a>
     </header>
 
     <main class="project-detail" style="--detail-accent: 223 177 113; --detail-secondary: 158 208 198;">
       <div class="project-detail__inner">
         <section class="detail-hero">
           <div class="detail-hero__panel">
-            <p class="detail-hero__eyebrow">( project 02 )</p>
-            <h1>The Spirit Land</h1>
-            <p class="detail-hero__subtitle">
-              EEG-Controlled First-Person Interactive Experience
-            </p>
-            <p class="detail-hero__summary">
-              The Spirit Land is a first-person BCI experience where Alpha and Beta brain
-              activity are translated into gameplay states in real time. The project sits
-              between Unity development, HCI research and physiological interaction design.
-            </p>
-            <div class="detail-tags">
-              <span>Unity</span>
-              <span>Python</span>
-              <span>OpenBCI</span>
-              <span>EEG</span>
-              <span>HCI</span>
-            </div>
-            <div class="detail-actions">
-              <a class="detail-button" href="../index.html#projects">Back to Portfolio</a>
+            <div class="detail-hero__content detail-hero__content--split">
+              <div class="detail-hero__copy">
+                <p class="detail-hero__eyebrow">( project 02 )</p>
+                <h1>The Spirit Land</h1>
+                <p class="detail-hero__subtitle">
+                  EEG-Controlled First-Person Interactive Experience
+                </p>
+                <p class="detail-hero__summary">
+                  The Spirit Land is a first-person BCI game triggered by EEG-based
+                  relaxation and focus. Built in Unity with OpenBCI, it maps Beta activity
+                  to forward walking and Alpha relaxation to environmental events, turning
+                  physiological data into an explorable and meditative interaction loop.
+                </p>
+                <div class="detail-tags">
+                  <span>Unity</span>
+                  <span>C#</span>
+                  <span>Python</span>
+                  <span>OpenBCI</span>
+                  <span>EEG</span>
+                  <span>HCI</span>
+                </div>
+                <div class="detail-actions">
+                  <a class="detail-button" href="../index.html?section=projects#projects">Back to Portfolio</a>
+                  <a class="detail-button detail-button--ghost" href="#spirit-land-playthrough">
+                    Jump to Playthrough
+                  </a>
+                </div>
+              </div>
+
+              <div class="detail-hero__media">
+                <p class="detail-label">Project Trailer</p>
+                <div class="detail-video-frame detail-video-frame--hero">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/YhorCzS4DEo?rel=0&modestbranding=1"
+                    title="The Spirit Land trailer"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -63,44 +84,51 @@
           <div class="detail-grid">
             <article class="detail-card">
               <p class="detail-label">Role</p>
-              <p class="detail-value">Unity Developer · HCI Researcher · Interaction Designer</p>
-            </article>
-            <article class="detail-card">
-              <p class="detail-label">Focus</p>
               <p class="detail-value">
-                Real-time sensor input, control logic, player feedback and usability.
+                Unity Developer · BCI Interaction Designer · HCI Researcher
               </p>
             </article>
             <article class="detail-card">
-              <p class="detail-label">What It Shows</p>
+              <p class="detail-label">System Focus</p>
               <p class="detail-value">
-                BCI integration, adaptive interaction design and evidence-based iteration.
+                Dual-wave EEG control, real-time data routing, calibration scenes and
+                immersive first-person interaction.
+              </p>
+            </article>
+            <article class="detail-card">
+              <p class="detail-label">Evidence</p>
+              <p class="detail-value">
+                A four-participant pilot evaluation, iterative usability testing and a
+                complete installation-ready showcase setup.
               </p>
             </article>
           </div>
         </section>
 
         <section class="detail-section">
-          <p class="section-kicker">( contribution )</p>
+          <p class="section-kicker">( premise )</p>
           <div class="detail-layout">
             <div class="detail-copy">
-              <h2>What I worked on</h2>
+              <h2>A dual-state BCI journey built around focus and relaxation</h2>
               <p>
-                My contribution covered both the interactive system and the experience
-                around it. I worked across concept development, Unity implementation,
-                Python integration, control logic, UI feedback and evaluation.
+                The project began with one core idea: instead of treating BCI control as a
+                single abstract mental-state input, different brain states should do
+                different jobs. In The Spirit Land, Beta activity supports locomotion,
+                while Alpha-based relaxation unlocks environmental responses such as bridge
+                reveals, spirit interactions and other world changes.
               </p>
-              <ul class="detail-list">
-                <li>Built the gameplay logic that responded to Alpha and Beta activity in real time.</li>
-                <li>Designed calibration, threshold tuning and fallback control to make the system more reliable.</li>
-                <li>Worked on narrative framing, environment feel, visual cues, audio feedback and usability testing.</li>
-                <li>Used participant sessions to review control, frustration, agency and immersion.</li>
-              </ul>
+              <p>
+                That separation let the system alternate between active control and calm
+                attention, which made the interaction easier to read and more meaningful
+                than a one-signal prototype. The first-person format was chosen to deepen
+                immersion in the present build while also leaving room for future VR
+                adaptation.
+              </p>
             </div>
 
             <div class="detail-side">
               <article class="detail-card">
-                <p class="detail-label">Signal Flow</p>
+                <p class="detail-label">Signal Path</p>
                 <div class="detail-flow">
                   <div class="detail-flow__row">
                     <span>EEG</span>
@@ -111,12 +139,20 @@
                     <span class="detail-flow__arrow">→</span>
                     <span>Unity</span>
                   </div>
+                  <div class="detail-flow__row">
+                    <span>Alpha Triggers</span>
+                    <span class="detail-flow__arrow">+</span>
+                    <span>Beta Walking</span>
+                    <span class="detail-flow__arrow">+</span>
+                    <span>Keyboard Fallback</span>
+                  </div>
                 </div>
               </article>
               <article class="detail-card">
-                <p class="detail-label">Research Angle</p>
+                <p class="detail-label">World Regions</p>
                 <p class="detail-value">
-                  Control stability, usability, player perception and immersive response.
+                  Spirit Lake, Flower Sea and Dynamic Forest were used as themed spaces for
+                  movement, atmosphere and BCI-triggered discovery.
                 </p>
               </article>
             </div>
@@ -124,26 +160,227 @@
         </section>
 
         <section class="detail-section">
-          <p class="section-kicker">( visuals )</p>
-          <h2>Visuals and process material</h2>
-          <div class="detail-gallery">
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>Gameplay Still</h3>
-              <p>A first-person scene or interaction screen can be added here later.</p>
-              <div class="detail-placeholder__frame"></div>
+          <p class="section-kicker">( interaction model )</p>
+          <h2>Movement, puzzles and accessibility were designed as one system</h2>
+          <div class="detail-grid">
+            <article class="detail-card">
+              <p class="detail-label">Beta Locomotion</p>
+              <p class="detail-value">
+                Real-time Beta band power was routed into Unity and compared against an
+                adjustable threshold so walking could be triggered through focused mental
+                effort rather than a standard controller alone.
+              </p>
             </article>
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>EEG Setup</h3>
-              <p>Hardware setup, calibration screen or BCI workflow image can go here.</p>
-              <div class="detail-placeholder__frame"></div>
+            <article class="detail-card">
+              <p class="detail-label">Alpha Relaxation Events</p>
+              <p class="detail-value">
+                Relaxation state was used to unlock environmental responses, including
+                puzzle-like reveals and magical feedback moments that made the world feel
+                reactive rather than decorative.
+              </p>
             </article>
-            <article class="detail-placeholder">
-              <span class="detail-placeholder__tag">Placeholder</span>
-              <h3>Testing Notes</h3>
-              <p>User testing photos, notes or a control-logic diagram can be added later.</p>
-              <div class="detail-placeholder__frame"></div>
+            <article class="detail-card">
+              <p class="detail-label">Hybrid Control</p>
+              <p class="detail-value">
+                Keyboard fallback stayed available throughout the experience so player
+                agency was never blocked by unstable signal moments or participant fatigue.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <p class="section-kicker">( training & support )</p>
+          <div class="detail-layout">
+            <div class="detail-copy">
+              <h2>Calibration was treated as part of the experience, not a barrier</h2>
+              <p>
+                To make the system more playable, I built separate training scenes for
+                relaxation and focus. The relaxation scene used strong visual feedback plus
+                an audio confirmation so participants could close their eyes and still know
+                when the threshold had been reached. The focus scene showed a direct
+                walking state response and supported threshold tuning.
+              </p>
+              <p>
+                Support tools were then layered in around those scenes: optional 20 Hz
+                flicker for Beta activation, Alpha and Beta binaural support, gameplay
+                music, a threshold dropdown and live brainwave readouts. Together, these
+                features turned calibration into a guided interaction rather than a hidden
+                technical step.
+              </p>
+            </div>
+
+            <div class="detail-side">
+              <article class="detail-card">
+                <p class="detail-label">Player Support Tools</p>
+                <ul class="detail-list">
+                  <li>Threshold personalisation for Beta walking.</li>
+                  <li>20 Hz flicker support for focus activation.</li>
+                  <li>Binaural audio support for Alpha and Beta modes.</li>
+                  <li>Live band readouts and on-screen relaxation status.</li>
+                </ul>
+              </article>
+              <article class="detail-card">
+                <p class="detail-label">Why It Matters</p>
+                <p class="detail-value">
+                  The project was not only about making EEG work technically, but about
+                  giving players enough guidance to stay calm, understand the system and
+                  keep moving through the experience.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <p class="section-kicker">( evaluation )</p>
+          <h2>Small-scale testing showed strong atmosphere and useful support tools</h2>
+          <p class="detail-note">
+            The project was evaluated through a four-participant pilot study combining
+            survey feedback and qualitative observation.
+          </p>
+          <div class="detail-grid detail-grid--four">
+            <article class="detail-card detail-card--metric">
+              <p class="detail-label">Participants</p>
+              <p class="detail-metric">4</p>
+              <p class="detail-value">
+                All participants were new to BCI interaction, making the test especially
+                useful for readability and first-time usability.
+              </p>
+            </article>
+            <article class="detail-card detail-card--metric">
+              <p class="detail-label">Environment Response</p>
+              <p class="detail-metric">100%</p>
+              <p class="detail-value">
+                Every participant described the world as peaceful, calming or relaxing,
+                confirming that the visual and audio atmosphere was doing real work.
+              </p>
+            </article>
+            <article class="detail-card detail-card--metric">
+              <p class="detail-label">Support Tool Value</p>
+              <p class="detail-metric">75%</p>
+              <p class="detail-value">
+                Most participants found the binaural support useful for relaxation or
+                concentration, and the 20 Hz flicker was also widely reported as helpful.
+              </p>
+            </article>
+            <article class="detail-card detail-card--metric">
+              <p class="detail-label">Control Preference</p>
+              <p class="detail-metric">50 / 50</p>
+              <p class="detail-value">
+                Half preferred Beta walking while half preferred keyboard movement, which
+                validated the decision to keep hybrid fallback inside the final build.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="detail-section" id="spirit-land-playthrough">
+          <p class="section-kicker">( playthrough )</p>
+          <h2>Trailer cut above, full walkthrough below</h2>
+          <p class="detail-note">
+            The trailer gives the fast overview, while the full playthrough shows the
+            pacing, calibration flow and how the world responds during longer interaction.
+          </p>
+          <article class="detail-media-card detail-media-card--wide">
+            <div class="detail-media-card__frame detail-media-card__frame--video">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/1F8tKpv1GVA?rel=0&modestbranding=1"
+                title="The Spirit Land playthrough"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="detail-media-card__body">
+              <span class="detail-placeholder__tag">Full Playthrough</span>
+              <h3>Longer gameplay view of the BCI loop</h3>
+              <p>
+                This longer recording makes it easier to understand the cadence of the
+                experience: walking, pause, reset, attention shift and environmental
+                reward. It also shows how the project functions beyond a single hero shot.
+              </p>
+              <div class="detail-actions">
+                <a
+                  class="detail-button detail-button--ghost"
+                  href="https://youtu.be/YhorCzS4DEo?si=VarIKEttkMjYwJeX"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Watch Trailer on YouTube
+                </a>
+                <a
+                  class="detail-button detail-button--ghost"
+                  href="https://youtu.be/1F8tKpv1GVA?si=0Ya-ZP5BWI0M_sSR"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Watch Playthrough on YouTube
+                </a>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="detail-section">
+          <p class="section-kicker">( showcase )</p>
+          <h2>Installation, participant testing and live presentation</h2>
+          <div class="detail-media-grid">
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/spirit-land-installation.jpg"
+                  alt="The Spirit Land installation setup with the game running on the main display, supporting screens and showcase poster."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Installation</span>
+                <h3>Showcase-ready physical setup</h3>
+                <p>
+                  The final setup combined the main display, support monitor, BCI hardware
+                  and printed research framing so the project could be experienced both as
+                  a game and as a public-facing research installation.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/spirit-land-relaxation-test.jpg"
+                  alt="Participant testing the relaxation scene of The Spirit Land with eyes closed while using EEG hardware."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Participant Testing</span>
+                <h3>Eyes-closed relaxation trial</h3>
+                <p>
+                  This test condition was important because Alpha-state interaction only
+                  works if the player can relax without needing to keep reading the screen.
+                  That is why the build included clear audio confirmation.
+                </p>
+              </div>
+            </article>
+
+            <article class="detail-media-card detail-media-card--wide">
+              <div class="detail-media-card__frame">
+                <img
+                  src="../images/projects/the-spirit-land/spirit-land-showcase.jpg"
+                  alt="Visitors gathered around The Spirit Land during the MMT showcase while Kevin Huang Wu presented the project."
+                  loading="lazy"
+                />
+              </div>
+              <div class="detail-media-card__body">
+                <span class="detail-placeholder__tag">Public Presentation</span>
+                <h3>Explaining the project at the MMT showcase</h3>
+                <p>
+                  Beyond the playable build, the project also needed to communicate itself
+                  clearly in person. Presenting it live helped demonstrate both the
+                  technical pipeline and the HCI reasoning behind the design decisions.
+                </p>
+              </div>
             </article>
           </div>
         </section>

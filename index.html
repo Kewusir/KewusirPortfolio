@@ -57,7 +57,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script>
       (function () {
-        var hashId = window.location.hash.replace(/^#/, "");
+        var requestedSection =
+          new URLSearchParams(window.location.search).get("section") || "";
+        var hashId = window.location.hash.replace(/^#/, "") || requestedSection;
         var navigationEntry =
           window.performance &&
           typeof window.performance.getEntriesByType === "function" &&
@@ -79,7 +81,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260811214500" />
+    <link rel="stylesheet" href="styles.css?v=20260812021000" />
   </head>
   <body class="is-loading">
     <div class="loader" aria-hidden="true">
@@ -693,6 +695,6 @@
       </section>
     </main>
 
-    <script src="main.js?v=20260812011500"></script>
+    <script src="main.js?v=20260812021000"></script>
   </body>
 </html>

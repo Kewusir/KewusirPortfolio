@@ -30,7 +30,9 @@
   const reloadToHome =
     navigationEntry?.type === "reload" ||
     performance.navigation?.type === performance.navigation.TYPE_RELOAD;
-  const initialHashId = window.location.hash.replace(/^#/, "");
+  const initialUrlParams = new URLSearchParams(window.location.search);
+  const initialHashId =
+    window.location.hash.replace(/^#/, "") || initialUrlParams.get("section") || "";
   const initialHashTarget =
     !reloadToHome && initialHashId ? document.getElementById(initialHashId) : null;
   const initialStageTarget =
@@ -93,6 +95,14 @@
       left: 0,
       behavior,
     });
+  }
+
+  function buildStageUrl(stageId = "") {
+    const params = new URLSearchParams(window.location.search);
+    params.delete("section");
+    const search = params.toString();
+    const hash = stageId ? `#${stageId}` : "";
+    return `${window.location.pathname}${search ? `?${search}` : ""}${hash}`;
   }
 
   function initMobileNav() {
@@ -162,8 +172,8 @@
       window.history.scrollRestoration = "manual";
     }
 
-    const cleanUrl = `${window.location.pathname}${window.location.search}`;
-    if (window.location.hash) {
+    const cleanUrl = buildStageUrl();
+    if (window.location.hash || initialUrlParams.has("section")) {
       window.history.replaceState(null, "", cleanUrl);
     }
 
@@ -220,6 +230,7 @@
       window.requestAnimationFrame(() => {
         scrollStageIntoView(section, "auto");
         setActiveNav(section.id);
+        window.history.replaceState(null, "", buildStageUrl(section.id));
         queueStageUpdate();
         document.documentElement.classList.remove("is-stage-entry");
       });
@@ -233,6 +244,7 @@
     window.setTimeout(() => {
       scrollStageIntoView(section);
       setActiveNav(section.id);
+      window.history.replaceState(null, "", buildStageUrl(section.id));
     }, 180);
 
     window.setTimeout(() => {
