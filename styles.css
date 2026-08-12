@@ -3030,6 +3030,417 @@ main {
   outline: none;
 }
 
+.aves-hero-title {
+  max-width: 15ch;
+  font-size: clamp(2.5rem, 5vw, 4.85rem);
+}
+
+.aves-scope-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.aves-scope-panel__list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.aves-scope-panel__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+}
+
+.aves-scope-panel__item p,
+.aves-scope-panel__note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.aves-scope-panel__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(var(--detail-accent, 223 177 113) / 0.14);
+  color: rgb(var(--detail-accent, 223 177 113) / 0.92);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.aves-scope-panel__note {
+  padding-top: 0.15rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aves-scope-panel__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.aves-scope-panel__actions .detail-button {
+  width: 100%;
+  justify-content: center;
+}
+
+.aves-question-card {
+  gap: 0.85rem;
+}
+
+.aves-question-card h2 {
+  max-width: 22ch;
+  font-size: clamp(1.85rem, 3vw, 2.85rem);
+}
+
+.aves-question-card p:last-child {
+  margin-top: 0;
+}
+
+.aves-workflow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 0.45rem;
+}
+
+.aves-workflow__step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.03);
+  color: rgba(242, 237, 231, 0.82);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.01);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.aves-workflow__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: rgba(var(--detail-secondary, 158 208 198) / 0.15);
+  color: rgb(var(--detail-secondary, 158 208 198) / 0.88);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.aves-workflow__arrow {
+  color: rgb(var(--detail-accent, 223 177 113) / 0.78);
+  font-size: 1.15rem;
+}
+
+.aves-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aves-spec-card {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.aves-spec-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.aves-spec-list div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.aves-spec-list dt {
+  color: rgb(var(--detail-secondary, 158 208 198) / 0.72);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aves-spec-list dd {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.aves-evidence-grid {
+  align-items: start;
+}
+
+.aves-evidence-frame {
+  border-radius: 18px;
+}
+
+.aves-evidence-frame--terminal {
+  aspect-ratio: 16 / 9.8;
+  background: rgba(248, 248, 248, 0.97);
+}
+
+.aves-evidence-frame--qctools {
+  aspect-ratio: 16 / 10.25;
+  background: rgba(242, 242, 242, 0.98);
+}
+
+.aves-timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+.aves-timeline__track {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: stretch;
+}
+
+.aves-timeline__item {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aves-timeline__year,
+.aves-timeline__text,
+.aves-timeline__count {
+  margin: 0;
+}
+
+.aves-timeline__year {
+  color: rgb(var(--detail-secondary, 158 208 198) / 0.72);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aves-timeline__count {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  color: rgb(var(--detail-accent, 223 177 113) / 0.95);
+}
+
+.aves-timeline__text {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.aves-timeline__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(var(--detail-accent, 223 177 113) / 0.78);
+  font-size: 1.4rem;
+}
+
+.aves-properties {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aves-properties__group {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.aves-properties__group--core {
+  background:
+    linear-gradient(180deg, rgba(var(--detail-accent, 223 177 113) / 0.08), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.aves-pill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.aves-pill-list span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.58rem 0.82rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(242, 237, 231, 0.78);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.69rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aves-pill-list--core span {
+  background: rgba(var(--detail-accent, 223 177 113) / 0.12);
+  color: rgb(var(--detail-accent, 223 177 113) / 0.95);
+}
+
+.aves-map {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.aves-map__root {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.58rem 0.82rem;
+  border-radius: 999px;
+  background: rgba(var(--detail-secondary, 158 208 198) / 0.15);
+  color: rgb(var(--detail-secondary, 158 208 198) / 0.9);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.aves-map__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aves-map__branch {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.aves-map__branch h3 {
+  margin: 0;
+  font-family: "Syne", sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: -0.04em;
+}
+
+.aves-map__branch .detail-list {
+  margin: 0;
+}
+
+.aves-map__branch--interaction {
+  grid-column: 1 / -1;
+}
+
+.aves-map__flow {
+  display: inline-grid;
+  gap: 0.35rem;
+  justify-items: start;
+  width: fit-content;
+  padding: 0.85rem 1rem;
+  border-radius: 18px;
+  background: rgba(var(--detail-accent, 223 177 113) / 0.08);
+  border: 1px solid rgba(var(--detail-accent, 223 177 113) / 0.18);
+}
+
+.aves-map__flow span {
+  color: rgb(var(--detail-accent, 223 177 113) / 0.92);
+  font-size: 1.2rem;
+}
+
+.aves-map__flow strong {
+  font-family: "Syne", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.03em;
+}
+
+.aves-risk-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.aves-risk-table th,
+.aves-risk-table td {
+  padding: 0.9rem 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.aves-risk-table thead th {
+  color: rgb(var(--detail-secondary, 158 208 198) / 0.74);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aves-risk-table tbody tr + tr td {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.aves-risk-table td:first-child {
+  padding-right: 1rem;
+  color: var(--muted);
+}
+
+.aves-risk-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.aves-risk-tag--critical {
+  background: rgba(220, 82, 82, 0.16);
+  color: rgba(255, 196, 196, 0.92);
+}
+
+.aves-risk-tag--high {
+  background: rgba(244, 156, 90, 0.16);
+  color: rgba(255, 220, 183, 0.92);
+}
+
+.aves-risk-tag--medium-high {
+  background: rgba(197, 160, 104, 0.16);
+  color: rgba(245, 226, 194, 0.92);
+}
+
+.aves-risk-tag--medium {
+  background: rgba(126, 173, 167, 0.16);
+  color: rgba(210, 241, 235, 0.92);
+}
+
+.aves-validation-card,
+.aves-report-card {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.aves-report-card p {
+  margin: 0;
+}
+
 @media (max-width: 1100px) {
   .detail-hero__content--split,
   .detail-grid,
@@ -3065,6 +3476,21 @@ main {
   .detail-hero__media {
     width: min(100%, 34rem);
     margin-left: 0;
+  }
+
+  .aves-spec-grid,
+  .aves-properties,
+  .aves-map__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aves-timeline__track {
+    grid-template-columns: 1fr;
+  }
+
+  .aves-timeline__arrow {
+    justify-self: center;
+    transform: rotate(90deg);
   }
 }
 
@@ -3115,6 +3541,16 @@ main {
   .detail-media-card {
     padding: 0.8rem;
   }
+
+  .aves-workflow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aves-workflow__arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
 }
 
 @media (max-width: 560px) {
@@ -3136,5 +3572,34 @@ main {
 
   .detail-pagination {
     justify-content: flex-start;
+  }
+
+  .aves-risk-table,
+  .aves-risk-table thead,
+  .aves-risk-table tbody,
+  .aves-risk-table tr,
+  .aves-risk-table th,
+  .aves-risk-table td {
+    display: block;
+  }
+
+  .aves-risk-table thead {
+    display: none;
+  }
+
+  .aves-risk-table td {
+    padding: 0.45rem 0;
+  }
+
+  .aves-risk-table td:first-child {
+    padding-right: 0;
+  }
+
+  .aves-risk-table tbody tr {
+    padding: 0.3rem 0 0.85rem;
+  }
+
+  .aves-risk-table tbody tr + tr {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 }
