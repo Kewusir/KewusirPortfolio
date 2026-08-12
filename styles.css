@@ -2375,6 +2375,7 @@ main {
 
 .detail-media-card__frame {
   overflow: hidden;
+  aspect-ratio: 16 / 10;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(5, 10, 12, 0.42);
@@ -2383,7 +2384,17 @@ main {
 .detail-media-card__frame img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.detail-media-card__frame--showcase-wide {
+  aspect-ratio: 16 / 7;
+}
+
+.detail-media-card__frame--showcase-wide img {
+  object-position: center 20%;
 }
 
 .detail-media-card__frame--video {
