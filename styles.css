@@ -2274,7 +2274,7 @@ main {
 }
 
 .detail-section--technical-focus {
-  gap: 0.84rem;
+  gap: 1rem;
 }
 
 .detail-section + .detail-section {
@@ -2369,12 +2369,12 @@ main {
 }
 
 .detail-media-grid--technical {
-  width: min(100%, 44rem);
-  margin: 0 auto;
-  grid-template-columns: minmax(0, 0.96fr) minmax(0, 0.72fr);
+  width: min(100%, 54rem);
+  margin: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
   align-items: start;
-  justify-content: center;
-  gap: 0.68rem;
+  justify-content: start;
+  gap: 0.96rem;
 }
 
 .detail-media-card {
@@ -2416,18 +2416,18 @@ main {
 
 .detail-media-card--menu-compact {
   width: 100%;
-  max-width: 18.5rem;
-  justify-self: center;
-  gap: 0.68rem;
-  padding: 0.72rem;
+  max-width: 23rem;
+  justify-self: start;
+  gap: 0.82rem;
+  padding: 0.92rem;
 }
 
 .detail-media-card--receiver-compact {
   width: 100%;
-  max-width: 15.5rem;
-  justify-self: center;
-  gap: 0.68rem;
-  padding: 0.72rem;
+  max-width: 19.25rem;
+  justify-self: start;
+  gap: 0.82rem;
+  padding: 0.92rem;
 }
 
 .detail-media-card__frame {
@@ -2479,11 +2479,11 @@ main {
 }
 
 .detail-media-card__frame--menu {
-  aspect-ratio: 10 / 7.15;
+  aspect-ratio: 10 / 8.15;
 }
 
 .detail-media-card__frame--receiver {
-  aspect-ratio: 16 / 4.45;
+  aspect-ratio: 16 / 6.1;
   background: rgba(248, 248, 248, 0.96);
 }
 
@@ -2549,6 +2549,10 @@ main {
   margin-top: -0.28rem;
 }
 
+.detail-section--technical-focus .detail-media-grid--technical {
+  margin-top: -0.02rem;
+}
+
 .detail-section--bridge-focus > h2,
 .detail-section--technical-focus > h2 {
   max-width: 15ch;
@@ -2559,7 +2563,8 @@ main {
 }
 
 .detail-section--technical-focus > h2 {
-  font-size: clamp(1.56rem, 2.04vw, 2rem);
+  max-width: 17ch;
+  font-size: clamp(1.7rem, 2.26vw, 2.24rem);
 }
 
 .detail-section--technical-focus .detail-media-card__body h3 {
@@ -2570,6 +2575,15 @@ main {
 .detail-section--bridge-focus .detail-media-card__body p {
   font-size: 0.9rem;
   line-height: 1.6;
+}
+
+.detail-section--technical-focus .detail-media-card__frame--technical {
+  padding: 0.5rem;
+}
+
+.detail-section--technical-focus .detail-media-card__body p {
+  font-size: 0.95rem;
+  line-height: 1.68;
 }
 
 .detail-media-card--bridge-tight .detail-media-card__body h3,
