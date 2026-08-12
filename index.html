@@ -87,7 +87,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260812050000" />
+    <link rel="stylesheet" href="styles.css?v=20260812053320" />
   </head>
   <body class="is-loading">
     <div class="loader" aria-hidden="true">
@@ -166,7 +166,7 @@
       </section>
 
       <section class="manifesto stage stage--paper" id="about" data-nav="about" data-transition="Profile">
-        <div class="manifesto__grid">
+        <div class="manifesto__grid stage-panel-surface">
           <div class="manifesto__intro">
             <p class="section-kicker section-kicker--dark">( profile )</p>
             <h2 class="manifesto__headline">
@@ -212,7 +212,8 @@
       </section>
 
       <section class="projects stage" id="projects" data-nav="projects" data-transition="Selected Work">
-        <div class="projects__sticky">
+        <div class="projects__inner stage-panel-surface">
+          <div class="projects__sticky">
           <div class="projects__header">
             <div class="projects__title-block">
               <p class="section-kicker">( selected work )</p>
@@ -220,9 +221,9 @@
             </div>
             <div class="projects__active">
               <p class="projects__counter" id="project-counter">Project 01</p>
-              <h3 class="projects__active-title" id="project-title">Dish WebApp</h3>
+              <h3 class="projects__active-title" id="project-title">The Spirit Land</h3>
               <p class="projects__active-subtitle" id="project-subtitle">
-                Gamified Food Discovery App for Dublin
+                EEG-Controlled First-Person Interactive Experience
               </p>
             </div>
           </div>
@@ -233,224 +234,252 @@
               <span
                 class="projects__canvas-hint"
                 data-desktop-label="Scroll to reform"
-                data-mobile-label="Tap or scroll to reform"
+                data-mobile-label="Swipe to shift"
               >
                 Scroll to reform
               </span>
             </div>
             <canvas id="project-canvas" aria-hidden="true"></canvas>
           </div>
-        </div>
+          </div>
 
-        <div class="projects__list">
-          <article
-            class="project-card is-active"
-            data-counter="01"
-            data-title="Dish WebApp"
-            data-subtitle="Gamified Food Discovery App for Dublin"
-            data-particle-text="DISH|WEBAPP"
-            data-particle-offset-y="-12"
-            data-accent="244 156 90"
-            data-secondary="174 224 147"
-          >
-            <div class="project-card__meta">
-              <span>Team Project</span>
-              <span>Web App</span>
-              <span>Express</span>
-              <span>MySQL</span>
-              <span>UI / UX</span>
-            </div>
-            <h3>Dish WebApp</h3>
-            <p class="project-card__role">Backend Developer · Database Developer · UI Contributor</p>
-            <p>
-              A team-built food exploration app that recommends restaurants and dishes in
-              Dublin, then turns discovery into a gamified loop through XP, levels,
-              reviews, avatars and profile customisation.
-            </p>
-            <ul>
-              <li>Built backend routes with Express and MySQL for auth, recommendation, feed, profile and review flows.</li>
-              <li>Worked on database structure and SQL logic, including XP progression, uploads and user-dish state.</li>
-              <li>Contributed UI polish through gamified feedback, avatar/settings flows and click-driven interaction details.</li>
-            </ul>
-            <div class="project-card__links">
-              <a class="project-card__link" href="projects/dish.html">
-                View in Detail
-              </a>
-              <a
-                class="project-card__link"
-                href="https://github.com/kbyrnes-tcd/dish"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View Repo
-              </a>
-            </div>
-          </article>
+          <div class="projects__carousel">
+            <button
+              class="projects__nav projects__nav--prev"
+              type="button"
+              aria-label="Previous project"
+            >
+              <span aria-hidden="true">‹</span>
+            </button>
 
-          <article
-            class="project-card"
-            data-counter="02"
-            data-title="The Spirit Land"
-            data-subtitle="EEG-Controlled First-Person Interactive Experience"
-            data-particle-text="SPIRIT|LAND"
-            data-accent="223 177 113"
-            data-secondary="158 208 198"
-          >
-            <div class="project-card__meta">
-              <span>Unity</span>
-              <span>Python</span>
-              <span>OpenBCI</span>
-              <span>EEG</span>
-              <span>HCI</span>
-            </div>
-            <h3>The Spirit Land</h3>
-            <p class="project-card__role">Unity Developer · HCI Researcher · Interaction Designer</p>
-            <p>
-              A first-person BCI experience where Alpha and Beta activity influenced
-              gameplay in real time through an OpenBCI to Python to Unity pipeline.
-            </p>
-            <ul>
-              <li>Built threshold logic, calibration flow, keyboard fallback and player feedback.</li>
-              <li>Worked across concept, narrative, environment design, UI and testing.</li>
-              <li>Evaluated usability, control, frustration, agency and immersion with participants.</li>
-            </ul>
-            <div class="project-card__links">
-              <a
-                class="project-card__link"
-                href="projects/the-spirit-land.html"
-              >
-                View in Detail
-              </a>
-            </div>
-          </article>
+            <div class="projects__viewport">
+              <div class="projects__list">
+                <article
+                  class="project-card is-active"
+                  data-project="spirit-land"
+                  data-counter="01"
+                  data-title="The Spirit Land"
+                  data-subtitle="EEG-Controlled First-Person Interactive Experience"
+                  data-particle-text="SPIRIT|LAND"
+                  data-particle-text-mobile="SPIRIT"
+                  data-accent="223 177 113"
+                  data-secondary="158 208 198"
+                >
+                <div class="project-card__meta">
+                  <span>Unity</span>
+                  <span>Python</span>
+                  <span>OpenBCI</span>
+                  <span>EEG</span>
+                  <span>HCI</span>
+                </div>
+                <h3>The Spirit Land</h3>
+                <p class="project-card__role">Unity Developer · HCI Researcher · Interaction Designer</p>
+                <p>
+                  A first-person BCI experience where Alpha and Beta activity influenced
+                  gameplay in real time through an OpenBCI to Python to Unity pipeline.
+                </p>
+                <ul>
+                  <li>Built threshold logic, calibration flow, keyboard fallback and player feedback.</li>
+                  <li>Worked across concept, narrative, environment design, UI and testing.</li>
+                  <li>Evaluated usability, control, frustration, agency and immersion with participants.</li>
+                </ul>
+                <div class="project-card__links">
+                  <a class="project-card__link" href="projects/the-spirit-land.html">
+                    View in Detail
+                  </a>
+                </div>
+              </article>
 
-          <article
-            class="project-card"
-            data-counter="03"
-            data-title="Da Bao'en Temple Museum Website"
-            data-subtitle="Interactive Museum Website with 3D Timeline and Bilingual UX"
-            data-particle-text="TEMPLE|WEBSITE"
-            data-particle-offset-y="-10"
-            data-accent="124 92 255"
-            data-secondary="223 177 113"
-          >
-            <div class="project-card__meta">
-              <span>Team Project</span>
-              <span>Three.js</span>
-              <span>UI / UX</span>
-              <span>Bilingual</span>
-              <span>API Integration</span>
-            </div>
-            <h3>Da Bao'en Temple Museum Website</h3>
-            <p class="project-card__role">UI Designer · Front-End Developer · API Integration</p>
-            <p>
-              A team-built museum website around the Da Bao'en Temple / Porcelain Tower,
-              designed as an immersive historical experience with 3D storytelling,
-              bilingual content and visitor-focused interaction.
-            </p>
-            <ul>
-              <li>Designed the overall UI direction, language tone and page-to-page experience for the team website.</li>
-              <li>Built key front-end effects and transitions, including the Three.js timeline and interactive visual flow.</li>
-              <li>Integrated external APIs and bilingual switching to support both interpretation and visitor usability.</li>
-            </ul>
-            <div class="project-card__links">
-              <a
-                class="project-card__link"
-                href="projects/da-bao-en-temple-museum-website.html"
+              <article
+                class="project-card"
+                data-project="dish"
+                data-counter="02"
+                data-title="Dish WebApp"
+                data-subtitle="Gamified Food Discovery App for Dublin"
+                data-particle-text="DISH|WEBAPP"
+                data-particle-text-mobile="DISH"
+                data-particle-offset-y="-12"
+                data-accent="244 156 90"
+                data-secondary="174 224 147"
               >
-                View in Detail
-              </a>
-              <a
-                class="project-card__link"
-                href="https://github.com/Kewusir/Da-Bao-en-Porcelain-Tower"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View Repo
-              </a>
-            </div>
-          </article>
+                <div class="project-card__meta">
+                  <span>Team Project</span>
+                  <span>Web App</span>
+                  <span>Express</span>
+                  <span>MySQL</span>
+                  <span>UI / UX</span>
+                </div>
+                <h3>Dish WebApp</h3>
+                <p class="project-card__role">Backend Developer · Database Developer · UI Contributor</p>
+                <p>
+                  A team-built food exploration app that recommends restaurants and dishes in
+                  Dublin, then turns discovery into a gamified loop through XP, levels,
+                  reviews, avatars and profile customisation.
+                </p>
+                <ul>
+                  <li>Built backend routes with Express and MySQL for auth, recommendation, feed, profile and review flows.</li>
+                  <li>Worked on database structure and SQL logic, including XP progression, uploads and user-dish state.</li>
+                  <li>Contributed UI polish through gamified feedback, avatar/settings flows and click-driven interaction details.</li>
+                </ul>
+                <div class="project-card__links">
+                  <a class="project-card__link" href="projects/dish.html">
+                    View in Detail
+                  </a>
+                  <a
+                    class="project-card__link"
+                    href="https://github.com/kbyrnes-tcd/dish"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Repo
+                  </a>
+                </div>
+              </article>
 
-          <article
-            class="project-card"
-            data-counter="04"
-            data-title="Biometric PCVR Horror Experience"
-            data-subtitle="EMG-Controlled Physical Interaction System"
-            data-particle-text="EMG|PCVR"
-            data-accent="216 117 92"
-            data-secondary="210 164 150"
-          >
-            <div class="project-card__meta">
-              <span>Unity</span>
-              <span>C#</span>
-              <span>Arduino Uno R3</span>
-              <span>EMG</span>
-              <span>PCVR</span>
-            </div>
-            <h3>Biometric PCVR Horror Experience</h3>
-            <p class="project-card__role">Project Manager · Technical Developer · Systems Integrator</p>
-            <p>
-              A 15 to 20 minute immersive horror system where muscle activity triggered
-              physical interaction in PCVR, combining custom hardware assembly with
-              repeated reliability testing.
-            </p>
-            <ul>
-              <li>Built and assembled the EMG sensing hardware used by the experience.</li>
-              <li>Tested false positives, missed detections, reset logic and contraction timing.</li>
-              <li>Integrated sensor input, gameplay events, fallback control and audio logic.</li>
-            </ul>
-            <div class="project-card__links">
-              <a
-                class="project-card__link"
-                href="projects/biometric-pcvr-horror-experience.html"
+              <article
+                class="project-card"
+                data-project="temple-website"
+                data-counter="03"
+                data-title="Da Bao'en Temple Museum Website"
+                data-subtitle="Interactive Museum Website with 3D Timeline and Bilingual UX"
+                data-particle-text="TEMPLE|WEBSITE"
+                data-particle-text-mobile="TEMPLE"
+                data-particle-offset-y="-10"
+                data-accent="124 92 255"
+                data-secondary="223 177 113"
               >
-                View in Detail
-              </a>
-            </div>
-          </article>
+                <div class="project-card__meta">
+                  <span>Team Project</span>
+                  <span>Three.js</span>
+                  <span>UI / UX</span>
+                  <span>Bilingual</span>
+                  <span>API Integration</span>
+                </div>
+                <h3>Da Bao'en Temple Museum Website</h3>
+                <p class="project-card__role">UI Designer · Front-End Developer · API Integration</p>
+                <p>
+                  A team-built museum website around the Da Bao'en Temple / Porcelain Tower,
+                  designed as an immersive historical experience with 3D storytelling,
+                  bilingual content and visitor-focused interaction.
+                </p>
+                <ul>
+                  <li>Designed the overall UI direction, language tone and page-to-page experience for the team website.</li>
+                  <li>Built key front-end effects and transitions, including the Three.js timeline and interactive visual flow.</li>
+                  <li>Integrated external APIs and bilingual switching to support both interpretation and visitor usability.</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    class="project-card__link"
+                    href="projects/da-bao-en-temple-museum-website.html"
+                  >
+                    View in Detail
+                  </a>
+                  <a
+                    class="project-card__link"
+                    href="https://github.com/Kewusir/Da-Bao-en-Porcelain-Tower"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    View Repo
+                  </a>
+                </div>
+              </article>
 
-          <article
-            class="project-card"
-            data-counter="05"
-            data-title="Spatial Audio & Immersion Research"
-            data-subtitle="VR, Experimental Design and User Experience Evaluation"
-            data-particle-text="SPATIAL|AUDIO"
-            data-accent="133 184 255"
-            data-secondary="126 221 214"
-          >
-            <div class="project-card__meta">
-              <span>VR</span>
-              <span>Binaural Audio</span>
-              <span>5.1</span>
-              <span>User Research</span>
-              <span>Data Analysis</span>
-            </div>
-            <h3>Spatial Audio &amp; Immersion Research</h3>
-            <p class="project-card__role">Researcher · Experimental Designer · UX Evaluator</p>
-            <p>
-              Research into how sound reproduction format changes localisation, spatial
-              perception, presence, immersion and overall user experience in audiovisual and
-              interactive contexts.
-            </p>
-            <ul>
-              <li>Designed comparative experiments for VR binaural vs stereo, and stereo vs 5.1.</li>
-              <li>Worked on ethics, participant procedures, testing, interpretation and reporting.</li>
-              <li>Used qualitative and quantitative evidence to inform immersive media evaluation.</li>
-            </ul>
-            <div class="project-card__links">
-              <a
-                class="project-card__link"
-                href="projects/spatial-audio-immersion-research.html"
+              <article
+                class="project-card"
+                data-project="biometric-pcvr"
+                data-counter="04"
+                data-title="Biometric PCVR Horror Experience"
+                data-subtitle="EMG-Controlled Physical Interaction System"
+                data-particle-text="EMG|PCVR"
+                data-particle-text-mobile="EMG"
+                data-accent="216 117 92"
+                data-secondary="210 164 150"
               >
-                View in Detail
-              </a>
+                <div class="project-card__meta">
+                  <span>Unity</span>
+                  <span>C#</span>
+                  <span>Arduino Uno R3</span>
+                  <span>EMG</span>
+                  <span>PCVR</span>
+                </div>
+                <h3>Biometric PCVR Horror Experience</h3>
+                <p class="project-card__role">Project Manager · Technical Developer · Systems Integrator</p>
+                <p>
+                  A 15 to 20 minute immersive horror system where muscle activity triggered
+                  physical interaction in PCVR, combining custom hardware assembly with
+                  repeated reliability testing.
+                </p>
+                <ul>
+                  <li>Built and assembled the EMG sensing hardware used by the experience.</li>
+                  <li>Tested false positives, missed detections, reset logic and contraction timing.</li>
+                  <li>Integrated sensor input, gameplay events, fallback control and audio logic.</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    class="project-card__link"
+                    href="projects/biometric-pcvr-horror-experience.html"
+                  >
+                    View in Detail
+                  </a>
+                </div>
+              </article>
+
+                <article
+                  class="project-card"
+                  data-project="spatial-audio"
+                  data-counter="05"
+                  data-title="Spatial Audio & Immersion Research"
+                  data-subtitle="VR, Experimental Design and User Experience Evaluation"
+                  data-particle-text="SPATIAL|AUDIO"
+                  data-particle-text-mobile="SPATIAL"
+                  data-accent="133 184 255"
+                  data-secondary="126 221 214"
+                >
+                <div class="project-card__meta">
+                  <span>VR</span>
+                  <span>Binaural Audio</span>
+                  <span>5.1</span>
+                  <span>User Research</span>
+                  <span>Data Analysis</span>
+                </div>
+                <h3>Spatial Audio &amp; Immersion Research</h3>
+                <p class="project-card__role">Researcher · Experimental Designer · UX Evaluator</p>
+                <p>
+                  Research into how sound reproduction format changes localisation, spatial
+                  perception, presence, immersion and overall user experience in audiovisual and
+                  interactive contexts.
+                </p>
+                <ul>
+                  <li>Designed comparative experiments for VR binaural vs stereo, and stereo vs 5.1.</li>
+                  <li>Worked on ethics, participant procedures, testing, interpretation and reporting.</li>
+                  <li>Used qualitative and quantitative evidence to inform immersive media evaluation.</li>
+                </ul>
+                <div class="project-card__links">
+                  <a
+                    class="project-card__link"
+                    href="projects/spatial-audio-immersion-research.html"
+                  >
+                    View in Detail
+                  </a>
+                </div>
+                </article>
+              </div>
             </div>
-          </article>
+
+            <button
+              class="projects__nav projects__nav--next"
+              type="button"
+              aria-label="Next project"
+            >
+              <span aria-hidden="true">›</span>
+            </button>
+          </div>
         </div>
       </section>
 
       <section class="research stage stage--dark" id="research" data-nav="research" data-transition="Research">
-        <div class="research__grid">
+        <div class="research__grid stage-panel-surface">
           <div class="research__lead">
             <p class="section-kicker">( research &amp; method )</p>
             <h2>
@@ -485,7 +514,7 @@
       </section>
 
       <section class="leadership stage" id="leadership" data-nav="leadership" data-transition="Leadership">
-        <div class="leadership__grid">
+        <div class="leadership__grid stage-panel-surface">
           <div class="leadership__cloud">
             <div class="leadership__field">
               <div class="leadership__orbit leadership__orbit--one"></div>
@@ -552,7 +581,7 @@
       </section>
 
       <section class="skills stage stage--paper" id="skills" data-nav="skills" data-transition="Capabilities">
-        <div class="skills__inner">
+        <div class="skills__inner stage-panel-surface">
           <div class="skills__lead">
             <p class="section-kicker section-kicker--dark">( capabilities )</p>
             <h2>Software, UI / UX, sensors, research, immersion and AI-enabled workflows.</h2>
@@ -683,7 +712,7 @@
       </section>
 
       <section class="contact stage stage--contact" id="contact" data-nav="contact" data-transition="Contact">
-        <div class="contact__inner">
+        <div class="contact__inner stage-panel-surface">
           <p class="section-kicker">( contact )</p>
           <h2>Open to product, software, UI / UX, immersive, QA, audio and audiovisual roles.</h2>
           <p class="contact__roles">
@@ -701,6 +730,6 @@
       </section>
     </main>
 
-    <script src="main.js?v=20260812050000"></script>
+    <script src="main.js?v=20260812053320"></script>
   </body>
 </html>
